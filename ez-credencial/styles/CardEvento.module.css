@@ -1,0 +1,46 @@
+.moldura {
+    margin: 5rem 1rem;
+    
+    font-size: 2rem;
+
+    border: 1px solid #000;
+
+    width: 15rem;
+    height: 15rem;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.moldura p {
+    padding: 3rem;
+    cursor: pointer;
+}
+
+.moldura p:active {
+    cursor: default ;
+}
+
+.titulo {
+    text-align: center;
+    font-weight: bold;
+}
+
+.acoes {
+    width: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.acoes * {
+    cursor: pointer;
+}
+
+.acoes *:active {
+    cursor: default;
+}
