@@ -1,9 +1,13 @@
 // import styles from "@/styles/Home.module.css";
+import CardEvento from '@/components/CardEvento';
+import usuario from '@/public/teste-usuario';
 
 export default function Dashboard() {
   return (
     <>
-      <h1>Dashboard</h1>
+      {usuario.hasOwnProperty('id') ? usuario.eventos.map(evento => (
+        <CardEvento evento={evento} />
+      )) : null}  
     </>
   );
 }
