@@ -1,0 +1,30 @@
+.moldura {
+  margin: 5rem 1rem;
+  
+  font-size: 1.6rem;
+
+  border: 1px solid #000;
+
+  width: 15rem;
+  height: 15rem;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.moldura:active {
+  cursor: default;
+}
+
+.titulo {
+  font-size: 1.6rem;
+}
+
+.icone {
+  font-size: 7rem;
+  font-weight: lighter;
+}
