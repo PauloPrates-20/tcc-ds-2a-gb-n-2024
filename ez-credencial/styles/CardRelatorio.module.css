@@ -12,6 +12,7 @@
   flex-flow: column nowrap;
   justify-content: space-evenly;
   align-items: center;
+  flex-shrink: 0;
 
   cursor: pointer;
 }
