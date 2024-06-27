@@ -7,8 +7,8 @@ export default function CardEvento({ evento }) {
         <div className={styles.moldura}>
             <p className={styles.titulo}>{evento.nome}</p>
             <div className={styles.acoes}>
-                <FaRegTrashCan />
-                <FaRegPenToSquare />
+                <FaRegTrashCan className={styles.icone} />
+                <FaRegPenToSquare className={styles.icone} />
             </div>
         </div>
     );

@@ -37,10 +37,14 @@
     align-items: center;
 }
 
-.acoes * {
+.icone {
     cursor: pointer;
 }
 
-.acoes *:active {
+.icone {
     cursor: default;
+}
+
+.icone {
+    font-size: 2rem;
 }
