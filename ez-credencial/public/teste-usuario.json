@@ -1,37 +1,34 @@
 {
     "id": 0,
     "nome": "Paulo Prates",
-    "cpf": "000.000.000-78",
+    "cpf": "000.000.000-00",
     "eventos": [
         {
-            "id": "0",
+            "id": 0,
             "nome": "Show de Teste",
             "dataInicio": "30/02/2099",
             "dataFim": null,
             "local": "Algum lugar, 393",
             "funcionarios": [],
             "link": null
-        },
-        {
-            "id": "1",
+        }, {
+            "id": 1,
             "nome": "Show de Teste1",
             "dataInicio": "30/02/2099",
             "dataFim": null,
             "local": "Algum lugar, 393",
             "funcionarios": [],
             "link": null
-        },
-        {
-            "id": "2",
+        }, {
+            "id": 2,
             "nome": "Show de Teste2",
             "dataInicio": "30/02/2099",
             "dataFim": null,
             "local": "Algum lugar, 393",
             "funcionarios": [],
             "link": null
-        },
-        {
-            "id": "3",
+        }, {
+            "id": 3,
             "nome": "Show de Teste3",
             "dataInicio": "30/02/2099",
             "dataFim": null,
@@ -40,5 +37,13 @@
             "link": null
         }
     ],
-    "relatorios": []
+    "relatorios": [
+        {
+            "id": 0,
+            "evento": 1,
+            "body": {
+                "data": "Informação exemplo"
+            }
+        }
+    ]
 }
