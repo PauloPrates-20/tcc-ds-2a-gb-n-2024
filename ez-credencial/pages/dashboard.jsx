@@ -5,6 +5,7 @@ import usuario from '@/public/teste-usuario';
 import { FaRegPenToSquare } from 'react-icons/fa6'
 
 import styles from "@/styles/Home.module.css";
+import CardRelatorio from '@/components/CardRelatorio';
 
 export default function Dashboard() {
   return (
@@ -18,6 +19,9 @@ export default function Dashboard() {
       </div>
 
       <Separador>Relatórios</Separador>
+      {usuario.hasOwnProperty('id') && usuario.relatorios.map(relatorio => (
+        <CardRelatorio key={relatorio.id} titulo={usuario.eventos.find(evento => evento.id === relatorio.evento).nome} />
+      ))}
     </div>
   );
 }
