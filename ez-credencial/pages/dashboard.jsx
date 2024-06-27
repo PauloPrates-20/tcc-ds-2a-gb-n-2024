@@ -5,9 +5,9 @@ import usuario from '@/public/teste-usuario';
 export default function Dashboard() {
   return (
     <>
-      {usuario.hasOwnProperty('id') ? usuario.eventos.map(evento => (
+      {usuario.hasOwnProperty('id') && usuario.eventos.map(evento => (
         <CardEvento evento={evento} />
-      )) : null}  
+      ))}  
     </>
   );
 }
