@@ -1,0 +1,41 @@
+.container {
+  width: 100%;
+
+  margin-top: 3rem;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.container p {
+  width: 32rem;
+  height: 4.8rem;
+  
+  font-size: 1.6rem;
+  font-weight: normal;
+
+  border-radius: 5rem;
+
+  margin: 3rem;
+}
+
+.entradas {
+  margin: 2rem;
+}
+
+.container button {
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
+.cadastroContainer {
+  position: relative;
+}
+
+.cadastro {
+  position: absolute;
+  top: 1.5rem;
+  left: 24rem;
+}
