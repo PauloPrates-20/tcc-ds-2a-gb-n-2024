@@ -1,0 +1,27 @@
+.container {
+    margin: 10rem 0;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    margin-bottom: 3rem;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.header p {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.container button {
+    font-size: 1.6rem;
+    font-weight: normal;
+}
