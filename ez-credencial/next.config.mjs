@@ -9,6 +9,14 @@ const nextConfig = {
         permanent: true
       }
     ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/addevento:id',
+        destination: '/addevento/:id'
+      }
+    ]
   }
 };
 
