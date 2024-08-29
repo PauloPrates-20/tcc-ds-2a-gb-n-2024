@@ -13,10 +13,6 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/addevento:id',
-        destination: '/addevento/:id'
-      },
-      {
         source: '/relatorio:id',
         destination: '/relatorio/:id'
       }
