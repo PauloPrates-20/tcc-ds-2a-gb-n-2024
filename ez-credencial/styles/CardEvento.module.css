@@ -40,12 +40,9 @@
 
 .icone {
     cursor: pointer;
-}
-
-.icone {
-    cursor: default;
-}
-
-.icone {
     font-size: 2rem;
+}
+
+.icone:active {
+    cursor: default;
 }
