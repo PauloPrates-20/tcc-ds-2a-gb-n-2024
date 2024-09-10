@@ -15,6 +15,10 @@ const nextConfig = {
       {
         source: '/relatorio:id',
         destination: '/relatorio/:id'
+      },
+      {
+        source: '/evento:id',
+        destination: '/evento/:id'
       }
     ]
   }
