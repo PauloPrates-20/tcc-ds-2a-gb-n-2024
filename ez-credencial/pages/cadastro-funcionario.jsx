@@ -18,7 +18,7 @@ export default function CadastroFuncionario() {
                 <p>FUNCIONARIO</p>
             </div>
             <div className={styles.form}>
-                <Entrada>CREDENCIAL</Entrada>
+                <Entrada disable={true}>CREDENCIAL</Entrada>
                 <Entrada>NOME</Entrada>
                 <Entrada>CARGO</Entrada>
                 <Entrada tipo="number">IDADE</Entrada>
