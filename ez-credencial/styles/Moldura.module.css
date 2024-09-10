@@ -1,0 +1,52 @@
+.detalhes {
+    width: 50%;
+
+    border: .1rem solid #000;
+    border-radius: 1.5rem;
+
+    background-color: #ddd;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.detalhes p:first-child {
+    width: 100%;
+    margin: 0;  
+}
+
+.texto {
+    padding: 1.2rem;
+
+    font-size: 1.4rem;
+    color: #000;
+    border-radius: 1.5rem;
+}
+
+.icons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+
+    cursor: pointer;
+}
+
+.icons:active {
+    cursor: default;
+}
+
+.icons p {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    font-size: 1.8rem;
+    gap: 1rem;
+}
+
+.icons p svg {
+    font-size: 3.2rem;
+}
