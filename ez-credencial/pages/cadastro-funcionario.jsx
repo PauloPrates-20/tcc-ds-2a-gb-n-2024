@@ -3,10 +3,10 @@ import Entrada from "@/components/Entrada";
 
 import styles from "@/styles/Cadastro.module.css";
 
-import icon from "@/public/assets/cadastro-empresa.png";
+import icon from "@/public/assets/cadastro-funcionario.png";
 import Separador from "@/components/Separador";
 
-export default function Cadastro() {
+export default function CadastroFuncionario() {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -15,17 +15,17 @@ export default function Cadastro() {
                     width={180}
                     alt="Logo"
                 />
-                <p>CADASTRO</p>
+                <p>FUNCIONARIO</p>
             </div>
             <div className={styles.form}>
+                <Entrada>CREDENCIAL</Entrada>
                 <Entrada>NOME</Entrada>
-                <Entrada tipo="password">SENHA</Entrada>
-                <Entrada tipo="password">CONFIRMAR SENHA</Entrada>
-                <Entrada>CNPJ</Entrada>
-                <Entrada>TELEFONE</Entrada>
-                <Entrada>ENDEREÇO</Entrada>
+                <Entrada>CARGO</Entrada>
+                <Entrada tipo="number">IDADE</Entrada>
+                <Entrada>CPF</Entrada>
+                <Entrada>EMAIL</Entrada>
             </div>
-            <Separador tipo="button">CADASTRAR</Separador>
+            <Separador tipo="button">ADICIONAR FUNCIONÁRIO</Separador>
         </div>
     );
 }
