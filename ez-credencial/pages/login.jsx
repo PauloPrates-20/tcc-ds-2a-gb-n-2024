@@ -8,12 +8,14 @@ export default function Login() {
     <div className={styles.container}>
       <Separador>LOGIN</Separador>
 
-      <div className={styles.entradas}>
-        <Entrada>EMAIL</Entrada>
-        <Entrada tipo='password'>SENHA</Entrada>
-      </div>
+      <form className={styles.form}>
+        <div className={styles.entradas}>
+          <Entrada nome='usuario'>EMAIL OU CNPJ</Entrada>
+          <Entrada nome='senha' tipo='password'>SENHA</Entrada>
+        </div>
 
-      <Separador tipo='button'>ENTRAR</Separador>
+        <Separador tipo='submit'>ENTRAR</Separador>
+      </form>
 
       <div className={styles.cadastroContainer}>
         <div className={styles.cadastro}>

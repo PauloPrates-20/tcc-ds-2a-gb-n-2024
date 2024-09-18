@@ -39,3 +39,12 @@
   top: 1.5rem;
   left: 24rem;
 }
+
+.form {
+  width: 100%;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
