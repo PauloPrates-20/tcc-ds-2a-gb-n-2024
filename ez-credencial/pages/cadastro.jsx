@@ -21,7 +21,9 @@ export default function Cadastro() {
             body: JSON.stringify(dados),
         });
         const resposta = await resp.json();
-        console.log(resposta);
+        
+        console.log(resposta.mensagem);
+        e.target.reset();
     }
     return (
         <div className={styles.container}>
