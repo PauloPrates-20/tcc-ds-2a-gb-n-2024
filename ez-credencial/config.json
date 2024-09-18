@@ -1,0 +1,10 @@
+{
+    "firebaseConfig": {
+        "apiKey": "AIzaSyCmAUyKBA4IVvTrSRLWvqrabV63xXx5zZk",
+        "authDomain": "ezcredencial.firebaseapp.com",
+        "projectId": "ezcredencial",
+        "storageBucket": "ezcredencial.appspot.com",
+        "messagingSenderId": "86303241754",
+        "appId": "1:86303241754:web:5327cc42331fb77e8643a3"
+  }
+}
