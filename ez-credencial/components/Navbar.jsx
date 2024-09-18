@@ -8,7 +8,7 @@ export default function Navbar() {
             <ul>
                 <li className={styles.logo}>Logo</li>
                 <li>
-                    <Link className={styles.link} href="/dashboard">Início</Link>
+                    <Link className={styles.link} href="/dashboard">Log Out</Link>
                 </li>
             </ul>
         </nav>
