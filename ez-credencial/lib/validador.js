@@ -5,7 +5,7 @@ export function validarCadastro(dadosUsuario) {
     if (!dadosUsuario?.email) {
         validacao.status = false
         validacao.erros.email = 'Campo email não pode estar vazio.';
-    } else if (!/\s*@\s*.com/.test(dadosUsuario.email)) {
+    } else if (!/\w+@\w+.com/.test(dadosUsuario.email)) {
         validacao.status = false;
         validacao.erros.email = 'Email inválido.'
     }
