@@ -10,18 +10,6 @@ const nextConfig = {
       }
     ];
   },
-  async rewrites() {
-    return [
-      {
-        source: '/relatorio:id',
-        destination: '/relatorio/:id'
-      },
-      {
-        source: '/evento:id',
-        destination: '/evento/:id'
-      }
-    ]
-  }
 };
 
 export default nextConfig;
