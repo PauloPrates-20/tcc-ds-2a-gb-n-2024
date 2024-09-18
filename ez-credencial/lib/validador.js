@@ -1,3 +1,5 @@
+import { lerUsuarios } from './firebase/firestoreQuerys';
+
 export function validarCadastro(dadosUsuario) {
     const validacao = { status: true, erros: {} };
 
@@ -38,4 +40,21 @@ export function validarCadastro(dadosUsuario) {
     }
 
     return validacao;
+}
+
+export async function validarUsuario(cnpj, email) {
+    const usuarios = await lerUsuarios();
+    let repetido = { status: false };
+
+    usuarios.forEach(usuario => {
+        if (usuario.email === email) {
+            repetido.status = true;
+            repetido.mensagem = 'Email já cadastrado.';
+        } else if (usuario.cnpj === cnpj) {
+            repetido.status = true;
+            repetido.mensagem = 'CNPJ já cadastrado.';
+        }
+    });
+
+    return repetido;
 }
