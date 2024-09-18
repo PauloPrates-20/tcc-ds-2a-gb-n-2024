@@ -7,7 +7,7 @@ import icon from "@/public/assets/cadastro-empresa.png";
 import Separador from "@/components/Separador";
 
 export default function Cadastro() {
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         const formulario = new FormData(e.target);
@@ -15,7 +15,13 @@ export default function Cadastro() {
         for (const [key, value] of formulario.entries()) {
             dados[key] = value;
         }
-        console.log(dados);
+        
+        const resp = await fetch('/api/cadastrar-usuario', {
+            method: 'POST',
+            body: JSON.stringify(dados),
+        });
+        const resposta = await resp.json();
+        console.log(resposta);
     }
     return (
         <div className={styles.container}>
