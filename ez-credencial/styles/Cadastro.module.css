@@ -33,7 +33,7 @@
     align-items: center;
 }   
 
-.formRow {
+.formRow  {
     width: 100%;
     height: calc(3*(3.8rem + 6rem));
 
