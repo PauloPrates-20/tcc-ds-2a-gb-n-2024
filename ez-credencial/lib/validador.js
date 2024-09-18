@@ -19,7 +19,7 @@ export function validarCadastro(dadosUsuario) {
     // Validação de confirmação de senha
     if (!dadosUsuario?.confirmarSenha || dadosUsuario?.confirmarSenha !== dadosUsuario?.senha) {
         validacao.status = false;
-        validacao.erros.senha = 'As senhas não coincidem.';
+        validacao.erros.confirmarSenha = 'As senhas não coincidem.';
     }
 
     if (!dadosUsuario?.nome) {
@@ -29,11 +29,13 @@ export function validarCadastro(dadosUsuario) {
 
     if (!dadosUsuario?.cnpj) {
         validacao.status = false;
-        validacao.erros.cnpj = 'Campo npj não pode estar vazio';
+        validacao.erros.cnpj = 'Campo CNPJ não pode estar vazio';
     }
 
     if (!dadosUsuario?.telefone) {
         validacao.status = false;
         validacao.erros.telefone = 'Campo telefone não pode estar vazio';
     }
+
+    return validacao;
 }
