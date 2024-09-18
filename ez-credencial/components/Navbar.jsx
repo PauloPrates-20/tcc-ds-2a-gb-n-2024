@@ -6,14 +6,9 @@ export default function Navbar() {
     return (
         <nav className={styles.navbar}>
             <ul>
-                <div className={styles.nav}>
-                    <li className={styles.logo}>Logo</li>
-                    <li>
-                        <Link className={styles.link} href="/dashboard">Início</Link>
-                    </li>
-                </div>
+                <li className={styles.logo}>Logo</li>
                 <li>
-                    <button className={styles.button}>Log Out</button>
+                    <Link className={styles.link} href="/dashboard">Início</Link>
                 </li>
             </ul>
         </nav>

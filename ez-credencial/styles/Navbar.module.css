@@ -28,14 +28,6 @@
     border-radius: 1rem;
 }
 
-.nav {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-}
-
 .logo {
     font-size: 2.4rem;
     cursor: default;
@@ -47,19 +39,5 @@
 }
 
 .link:active {
-    cursor: default;
-}
-
-.button {
-    text-decoration: none;
-    color: #fff;
-    background-color: transparent;
-    padding: 0;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.button:active  {
     cursor: default;
 }
