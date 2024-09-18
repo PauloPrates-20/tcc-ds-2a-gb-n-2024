@@ -6,15 +6,29 @@ const app = initializeApp(firebaseConfig);
 const bd = getFirestore(app);
 
 const caminhos = {
-    usuarios: 'Usuarios',
+    usuarios: 'Usuario',
 };
 
 export async function cadastrarUsuario(dadosUsuario) {
-    try {
-        const documento = await addDoc(collection(bd, caminhos.usuarios));
+    let resposta = { status: true };
+    const usuario = {
+        cnpj: dadosUsuario.cnpj,
+        email: dadosUsuario.email,
+        eventos: [],
+        nome: dadosUsuario.nome,
+        senha: dadosUsuario.senha,
+        status: false,
+        telefone: dadosUsuario.telefone
+    };
 
-        console.log(`Usuário ${documento.id} cadastrado com sucesso`);
+    try {
+        await addDoc(collection(bd, caminhos.usuarios), usuario);
+
+        resposta.mensagem = `Usuário cadastrado com sucesso.`
     } catch (erro) {
-        console.error(`Erro de banco de dados: ${erro}`);
+        resposta.status = false;
+        resposta.mensagem = `Erro de banco de dados: ${erro}`;
     }
+
+    return resposta;
 }
