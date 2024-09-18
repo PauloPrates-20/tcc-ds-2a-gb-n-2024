@@ -1,6 +1,6 @@
 import { firebaseConfig } from '@/config.json';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection } from 'firebase/firestore';
+import { getFirestore, addDoc, collection, getDocs } from 'firebase/firestore';
 
 const app = initializeApp(firebaseConfig);
 const bd = getFirestore(app);
@@ -31,4 +31,14 @@ export async function cadastrarUsuario(dadosUsuario) {
     }
 
     return resposta;
+}
+
+export async function lerUsuarios(email, senha, cnpj) {
+    const query = await getDocs(collection(bd, caminhos.usuarios));
+    const usuarios = [];
+    query.forEach(usuario => {
+        usuarios.push(usuario.data());
+    })
+
+    return usuarios;
 }
