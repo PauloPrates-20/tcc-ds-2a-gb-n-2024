@@ -5,9 +5,9 @@ export default function Separador({ children, tipo}) {
         <p className={styles.tag}>{children}</p>
     );
 
-    if (tipo === 'button') {
+    if (tipo) {
         componente = (
-            <button className={styles.button}>
+            <button type={tipo} className={styles.button}>
                 {children}
             </button>
         );
