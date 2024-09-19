@@ -1,10 +1,7 @@
 import Image from "next/image";
-import Entrada from "@/app/components/Entrada";
-
 import styles from "@/styles/Cadastro.module.css";
-
 import icon from "@/public/assets/cadastro-funcionario.png";
-import Separador from "@/app/components/Separador";
+import FormFuncionario from "@/app/components/FormFuncionario";
 
 export default function CadastroFuncionario() {
     return (
@@ -17,15 +14,7 @@ export default function CadastroFuncionario() {
                 />
                 <p>FUNCIONARIO</p>
             </div>
-            <div className={styles.form}>
-                <Entrada disable={true}>CREDENCIAL</Entrada>
-                <Entrada>NOME</Entrada>
-                <Entrada>CARGO</Entrada>
-                <Entrada tipo="number">IDADE</Entrada>
-                <Entrada>CPF</Entrada>
-                <Entrada>EMAIL</Entrada>
-            </div>
-            <Separador tipo="button">ADICIONAR FUNCIONÁRIO</Separador>
+            <FormFuncionario />
         </div>
     );
 }
