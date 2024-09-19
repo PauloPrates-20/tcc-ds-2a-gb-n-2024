@@ -1,5 +1,5 @@
-import Separador from "@/components/Separador";
-import Entrada from "@/components/Entrada";
+import Separador from "@/app/components/Separador";
+import Entrada from "@/app/components/Entrada";
 
 import styles from "@/styles/Login.module.css";
 

@@ -1,5 +1,5 @@
-import Entrada from '@/components/Entrada';
-import Separador from '@/components/Separador';
+import Entrada from '@/app/components/Entrada';
+import Separador from '@/app/components/Separador';
 
 import styles from '@/styles/Convite.module.css';
 

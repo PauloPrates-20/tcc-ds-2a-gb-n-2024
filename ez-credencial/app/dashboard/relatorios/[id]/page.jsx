@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Separador from "@/components/Separador";
-import Moldura from "@/components/Moldura";
+import Separador from "@/app/components/Separador";
 
 import icon from "@/public/assets/relatorio.png";
 

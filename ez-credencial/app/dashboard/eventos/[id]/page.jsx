@@ -1,5 +1,5 @@
-import Moldura from "@/components/Moldura";
-import Separador from "@/components/Separador";
+import Moldura from "@/app/components/Moldura";
+import Separador from "@/app/components/Separador";
 import styles from "@/styles/Evento.module.css";
 
 export default function Evento() {

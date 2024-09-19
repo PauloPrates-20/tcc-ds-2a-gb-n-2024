@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Entrada from "@/components/Entrada";
+import Entrada from "@/app/components/Entrada";
 
 import styles from "@/styles/Cadastro.module.css";
 
 import icon from "@/public/assets/cadastro-funcionario.png";
-import Separador from "@/components/Separador";
+import Separador from "@/app/components/Separador";
 
 export default function CadastroFuncionario() {
     return (

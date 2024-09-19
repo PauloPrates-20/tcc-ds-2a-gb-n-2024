@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import Entrada from "@/components/Entrada";
-import Separador from "@/components/Separador";
+import Entrada from "@/app/components/Entrada";
+import Separador from "@/app/components/Separador";
 
 import icon from "@/public/assets/evento.png";
 

@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Entrada from "@/components/Entrada";
+import Entrada from "@/app/components/Entrada";
 
 import styles from "@/styles/Cadastro.module.css";
 
 import icon from "@/public/assets/cadastro-empresa.png";
-import Separador from "@/components/Separador";
+import Separador from "@/app/components/Separador";
 
 export default function Cadastro() {
     async function handleSubmit(e) {
@@ -35,7 +35,7 @@ export default function Cadastro() {
                 />
                 <p>CADASTRO</p>
             </div>
-            <form onSubmit={handleSubmit} className={styles.formRow}>
+            <form className={styles.formRow}>
                 <div className={styles.form}>
                     <Entrada nome='email'>EMAIL</Entrada>
                     <Entrada nome='senha' tipo="password">SENHA</Entrada>
