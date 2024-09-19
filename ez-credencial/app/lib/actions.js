@@ -1,7 +1,7 @@
 'use server';
 import { lerUsuarios, cadastrarUsuario } from '@/app/lib/firebase/firestoreQuerys';
 
-export function validarCadastro(dadosUsuario) {
+export async function validarCadastro(dadosUsuario) {
     const validacao = { status: true, erros: {} };
 
     // Validação de email
@@ -60,8 +60,8 @@ export async function validarUsuario(cnpj, email) {
     return repetido;
 }
 
-export async function CadastrarUsuario(dadosUsuario) {
-    const validacao = validarCadastro(dadosUsuario);
+export async function cadastrar(dadosUsuario) {
+    const validacao = await validarCadastro(dadosUsuario);
     
     if (!validacao.status) return validacao;
 

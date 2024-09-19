@@ -1,11 +1,12 @@
 import Image from "next/image";
-
 import Entrada from "@/app/components/Entrada";
 import Separador from "@/app/components/Separador";
-
 import icon from "@/public/assets/evento.png";
-
 import styles from "@/styles/AddEvento.module.css";
+
+export const metadata = {
+    title: 'Novo Evento',
+};
 
 export default function AddEvento() {
     return (
