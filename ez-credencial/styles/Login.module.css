@@ -21,10 +21,6 @@
   margin: 3rem;
 }
 
-.entradas {
-  margin: 2rem;
-}
-
 .container button {
   font-size: 1.6rem;
   font-weight: normal;
@@ -38,13 +34,4 @@
   position: absolute;
   top: 1.5rem;
   left: 24rem;
-}
-
-.form {
-  width: 100%;
-
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
 }
