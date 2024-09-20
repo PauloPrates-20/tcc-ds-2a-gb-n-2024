@@ -75,15 +75,6 @@ export async function cadastrar(dadosUsuario) {
     return resposta;
 }
 
-export async function logar(formData) {
-	try {
-		const dados = { usuario: formData.get('usuario'), senha: formData.get('senha') };
-		await signIn('credentials', { ...dados, callbackUrl: '/dashboard' });
-	} catch (erro) {
-		return 'Algo deu errado';
-	}
-}
-
 export async function deslogar() {
-	await signOut({ callbackUrl: '/login' });
+	await signOut({ redirectTo: '/login' });
 }
