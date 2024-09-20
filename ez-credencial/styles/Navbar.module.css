@@ -49,15 +49,3 @@
     justify-content: center;
     gap: 2rem;
 }
-
-.logout {
-    font-weight: bold;
-    border: none;
-    color: #fff;
-    background-color: transparent;
-    cursor: pointer
-}
-
-.logout:active {
-    cursor: default;
-}

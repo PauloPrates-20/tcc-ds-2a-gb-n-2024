@@ -1,5 +1,7 @@
 'use server';
 import { lerUsuarios, cadastrarUsuario } from '@/app/lib/firebase/firestoreQuerys';
+import { signIn, signOut } from '@/auth';
+import credentials from 'next-auth/providers/credentials';
 
 export async function validarCadastro(dadosUsuario) {
     const validacao = { status: true, erros: {} };
@@ -71,4 +73,17 @@ export async function cadastrar(dadosUsuario) {
 
     const resposta = await cadastrarUsuario(dadosUsuario);
     return resposta;
+}
+
+export async function logar(formData) {
+	try {
+		const dados = { usuario: formData.get('usuario'), senha: formData.get('senha') };
+		await signIn('credentials', { ...dados, callbackUrl: '/dashboard' });
+	} catch (erro) {
+		return 'Algo deu errado';
+	}
+}
+
+export async function deslogar() {
+	await signOut({ callbackUrl: '/login' });
 }

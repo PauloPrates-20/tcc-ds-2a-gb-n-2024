@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import styles from '@/styles/Navbar.module.css';
 import { usePathname } from 'next/navigation';
+import Logout from './Logout';
 
 export default function Navbar() {
     const pathname = usePathname();
@@ -16,7 +17,7 @@ export default function Navbar() {
                 </li>
             </div>
             <li>
-                <button className={styles.logout}>Log Out</button>
+							<Logout />
             </li>
         </ul>
     </nav>

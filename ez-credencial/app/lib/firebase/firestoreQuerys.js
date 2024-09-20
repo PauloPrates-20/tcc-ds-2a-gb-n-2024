@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, addDoc, collection, getDocs, query, where, or } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -48,4 +48,31 @@ export async function lerUsuarios(email, senha, cnpj) {
     })
 
     return usuarios;
+}
+
+export async function logarUsuario(credenciais) {
+	const q = query(
+		collection(bd, caminhos.usuarios),
+		or(
+			where('email', '==', credenciais.usuario),
+			where('cnpj', '==', credenciais.usuario)
+		)
+	);
+	
+	try {
+		const querySnapshot = await getDocs(q);
+
+		if (!querySnapshot.empty) {
+			const doc = querySnapshot.docs[0];
+
+			if (doc.data().senha === credenciais.senha) return {
+				status: true,
+				mensagem: 'Usuário logado com sucesso',
+				usuario: { id: doc.id, data: doc.data}
+			}
+		}
+	} catch (erro) {
+		console.error('Falha ao logar usuário: ', erro);
+		throw new Error('Falha ao logar usuário');
+	}
 }
