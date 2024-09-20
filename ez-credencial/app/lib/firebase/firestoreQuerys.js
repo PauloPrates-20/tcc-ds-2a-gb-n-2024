@@ -75,4 +75,6 @@ export async function logarUsuario(credenciais) {
 		console.error('Falha ao logar usuário: ', erro);
 		throw new Error('Falha ao logar usuário');
 	}
+
+    return null;
 }
