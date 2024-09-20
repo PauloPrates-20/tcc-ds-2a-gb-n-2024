@@ -1,4 +1,3 @@
-import { logar } from '../lib/actions';
 import Entrada from './Entrada';
 import Separador from './Separador';
 import styles from '@/styles/FormLogin.module.css';

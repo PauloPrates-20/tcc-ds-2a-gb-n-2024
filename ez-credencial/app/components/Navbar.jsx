@@ -17,7 +17,7 @@ export default function Navbar() {
                 </li>
             </div>
             <li>
-							<Logout />
+				<Logout />
             </li>
         </ul>
     </nav>
