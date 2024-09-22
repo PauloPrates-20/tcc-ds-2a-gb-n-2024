@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, addDoc, collection, getDocs, query, where, or } from 'firebase/firestore';
 
+// Configuração do banco de dados
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
@@ -12,10 +13,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const bd = getFirestore(app);
 
+// Definição do caminho das coleções
 const caminhos = {
     usuarios: 'Usuario',
 };
 
+// Função para gravar o documento usuário no banco de dados
 export async function cadastrarUsuario(dadosUsuario) {
     let resposta = { status: true };
     const usuario = {
@@ -40,7 +43,8 @@ export async function cadastrarUsuario(dadosUsuario) {
     return resposta;
 }
 
-export async function lerUsuarios(email, senha, cnpj) {
+// Função para ler todos os usuários do banco de dados
+export async function lerUsuarios() {
     const query = await getDocs(collection(bd, caminhos.usuarios));
     const usuarios = [];
     query.forEach(usuario => {
@@ -50,7 +54,10 @@ export async function lerUsuarios(email, senha, cnpj) {
     return usuarios;
 }
 
+// Função para recuperar o usuário e comparar a senha
+// Credenciais = { usuario, senha }
 export async function logarUsuario(credenciais) {
+	// Query para encontrar o usuário por email ou cnpj
 	const q = query(
 		collection(bd, caminhos.usuarios),
 		or(
@@ -60,21 +67,21 @@ export async function logarUsuario(credenciais) {
 	);
 	
 	try {
+		// Executa a query
 		const querySnapshot = await getDocs(q);
 
 		if (!querySnapshot.empty) {
 			const doc = querySnapshot.docs[0];
 
+			// Verifica se a senha digitada é igual a senha cadastrada para o login
 			if (doc.data().senha === credenciais.senha) return {
 				status: true,
 				mensagem: 'Usuário logado com sucesso',
 				usuario: { id: doc.id, data: doc.data}
-			}
-		}
+			};
+		} else return { status: false, mensagem: 'Usuário ou senha incorretos' };
 	} catch (erro) {
 		console.error('Falha ao logar usuário: ', erro);
-		throw new Error('Falha ao logar usuário');
+		return { status: false, mensagem: erro };
 	}
-
-    return null;
 }
