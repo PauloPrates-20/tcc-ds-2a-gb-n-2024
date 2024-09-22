@@ -1,21 +1,21 @@
 'use client';
 
 import Entrada from './Entrada';
-import Separador from './Separador';
+import BotaoForm from './BotaoForm';
 import styles from '@/styles/FormFuncionario.module.css';
 
 export default function FormFuncionario() {
     return (
         <form className={styles.formRow}>
             <div className={styles.form}>
-                <Entrada disable={true}>CREDENCIAL</Entrada>
-                <Entrada>NOME</Entrada>
-                <Entrada>CARGO</Entrada>
-                <Entrada tipo="number">IDADE</Entrada>
-                <Entrada>CPF</Entrada>
-                <Entrada>EMAIL</Entrada>
+                <Entrada nome='credencial' disable={true}>CREDENCIAL</Entrada>
+                <Entrada nome='nome'>NOME</Entrada>
+                <Entrada nome='cargo'>CARGO</Entrada>
+                <Entrada nome='idade' tipo="number">IDADE</Entrada>
+                <Entrada nome='cpf'>CPF</Entrada>
+                <Entrada nome='email'>EMAIL</Entrada>
             </div>
-            <Separador tipo="button">ADICIONAR FUNCIONÁRIO</Separador>
+            <BotaoForm tipo="submit">ADICIONAR FUNCIONÁRIO</BotaoForm>
         </form>
     );
 }

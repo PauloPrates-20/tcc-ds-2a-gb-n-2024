@@ -1,5 +1,5 @@
 import Entrada from './Entrada';
-import Separador from './Separador';
+import BotaoForm from './BotaoForm';
 import styles from '@/styles/FormLogin.module.css';
 import { signIn } from '@/auth';
 
@@ -15,7 +15,7 @@ export default function FormLogin() {
 				<Entrada nome='senha' tipo='password'>SENHA</Entrada>
 			</div>
 
-			<Separador tipo='submit'>ENTRAR</Separador>
+			<BotaoForm tipo='submit'>ENTRAR</BotaoForm>
 		</form>
 	);
 }

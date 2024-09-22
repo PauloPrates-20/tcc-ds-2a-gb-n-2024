@@ -1,8 +1,8 @@
 'use client';
 
 import styles from '@/styles/FormCadastro.module.css';
+import BotaoForm from './BotaoForm';
 import Entrada from './Entrada';
-import Separador from './Separador';
 import { cadastrar } from '../lib/actions';
 
 
@@ -32,7 +32,7 @@ export default function FormCadastro() {
                 <Entrada nome='cnpj'>CNPJ</Entrada>
                 <Entrada nome='telefone'>TELEFONE</Entrada>
             </div>
-            <Separador tipo="submit">CADASTRAR</Separador>
+            <BotaoForm tipo="submit">CADASTRAR</BotaoForm>
         </form>
     );
 }
