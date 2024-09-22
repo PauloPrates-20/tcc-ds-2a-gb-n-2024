@@ -10,7 +10,8 @@ export const authConfig = {
 
 			if (!estaEmRotaPublica) {
 				if (estaAutenticado) return true;
-				return false;
+				// return false // Produção
+				return true; // Para teste
 			} else if (estaAutenticado) {
 				return Response.redirect(new URL('/dashboard', nextUrl));
 			}
