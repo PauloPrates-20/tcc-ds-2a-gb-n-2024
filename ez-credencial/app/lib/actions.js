@@ -1,8 +1,8 @@
 'use server';
 import { lerUsuarios, cadastrarUsuario } from '@/app/lib/firebase/firestoreQuerys';
-import { signIn, signOut } from '@/auth';
-import credentials from 'next-auth/providers/credentials';
+import { signOut } from '@/auth';
 
+// Verifica se os dados do formulário de cadastro estão corretos
 export async function validarCadastro(dadosUsuario) {
     const validacao = { status: true, erros: {} };
 
@@ -10,7 +10,7 @@ export async function validarCadastro(dadosUsuario) {
     if (!dadosUsuario?.email) {
         validacao.status = false
         validacao.erros.email = 'Campo email não pode estar vazio.';
-    } else if (!/\w+@\w+.com/.test(dadosUsuario.email)) {
+    } else if (!/\w+@\w+.com/.test(dadosUsuario.email)) { // Usa uma Expressão Regular para verificar se o formato do email é valido
         validacao.status = false;
         validacao.erros.email = 'Email inválido.'
     }
@@ -45,9 +45,10 @@ export async function validarCadastro(dadosUsuario) {
     return validacao;
 }
 
+// Verifica se o usuário já existe no banco de dados
 export async function validarUsuario(cnpj, email) {
     const usuarios = await lerUsuarios();
-    let repetido = { status: false };
+    let repetido = { status: false, mensagem: '' };
 
     usuarios.forEach(usuario => {
         if (usuario.email === email) {
@@ -62,6 +63,7 @@ export async function validarUsuario(cnpj, email) {
     return repetido;
 }
 
+// Executa as validações e cadastra o usuário
 export async function cadastrar(dadosUsuario) {
     const validacao = await validarCadastro(dadosUsuario);
     
@@ -75,6 +77,8 @@ export async function cadastrar(dadosUsuario) {
     return resposta;
 }
 
+// Ação para deslogar o usuário
+// Precisou ser criada para evitar conflitos entre componentes de client e servidor
 export async function deslogar() {
 	await signOut({ redirectTo: '/login' });
 }
