@@ -1,0 +1,19 @@
+.tag {
+    margin-top: 3rem;
+
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+
+    background-color: #333;
+
+    padding: 1rem 3rem;
+    width: fit-content;
+    border-radius: 1.5rem;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
