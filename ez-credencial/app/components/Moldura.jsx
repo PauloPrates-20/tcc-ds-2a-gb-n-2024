@@ -1,13 +1,13 @@
 import { FaPenToSquare, FaRegTrashCan } from "react-icons/fa6";
 
-import Separador from "./Separador";
+import Etiqueta from "./Etiqueta";
 import styles from "@/styles/Moldura.module.css";
 
 
 export default function Moldura({ titulo, children }) {
     return (
         <div className={styles.detalhes}>
-            <Separador>{titulo}</Separador>
+            <Etiqueta>{titulo}</Etiqueta>
             <div className={styles.texto}>
                 <p>{children}</p>
             </div>

@@ -1,16 +1,16 @@
 import Entrada from '@/app/components/Entrada';
-import Separador from '@/app/components/Separador';
-
+import BotaoForm from '@/app/components/BotaoForm';
+import Etiqueta from '@/app/components/Etiqueta';
 import styles from '@/styles/Convite.module.css';
 
 export default function Convite() {
     return (
         <div className={styles.container}> 
             <div className={styles.header}>
-                <Separador>INSIRA O CÓDIGO</Separador>
+                <Etiqueta>INSIRA O CÓDIGO</Etiqueta>
             </div>
             <Entrada>Ex: 3ff817s87a878ds</Entrada>
-            <Separador tipo="button">VERIFICAR CÓDIGO</Separador>
+            <BotaoForm tipo="submit">VERIFICAR CÓDIGO</BotaoForm>
         </div>
     );
 }

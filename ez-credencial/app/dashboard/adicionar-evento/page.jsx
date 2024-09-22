@@ -1,8 +1,8 @@
-import Image from "next/image";
-import Entrada from "@/app/components/Entrada";
-import Separador from "@/app/components/Separador";
-import icon from "@/public/assets/evento.png";
-import styles from "@/styles/AddEvento.module.css";
+import Image from 'next/image';
+import Entrada from '@/app/components/Entrada';
+import BotaoForm from '@/app/components/BotaoForm';
+import icon from '@/public/assets/evento.png';
+import styles from '@/styles/AddEvento.module.css';
 
 export const metadata = {
     title: 'Novo Evento',
@@ -15,7 +15,7 @@ export default function AddEvento() {
                 <Image 
                     src={icon}
                     width={128}
-                    alt="Logo"
+                    alt='Logo'
                 />
                 <p>EVENTO</p>
             </div>
@@ -24,7 +24,7 @@ export default function AddEvento() {
                 <Entrada>DATA</Entrada>
                 <Entrada>LOCAL</Entrada>
             </div>
-            <Separador tipo="button">ADICIONAR EVENTO</Separador>
+            <BotaoForm tipo='submit'>ADICIONAR EVENTO</BotaoForm>
         </div>
     );
 }
