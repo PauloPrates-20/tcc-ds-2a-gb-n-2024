@@ -74,16 +74,16 @@ export async function logarUsuario(credenciais) {
 			const doc = querySnapshot.docs[0];
 
 			// Verifica se a senha digitada é igual a senha cadastrada para o login
-			if (doc.data().senha === credenciais.senha) return {
-				status: true,
-				mensagem: 'Usuário logado com sucesso',
-				usuario: { id: doc.id, data: doc.data}
-			};
+			if (doc.data().senha === credenciais.senha) {
+                const user = {id: doc.id, data: doc.data()};
+
+                return user;
+            }
 		}
 
-        return { status: false, mensagem: 'Usuário ou senha incorretos' };
+        return null;
 	} catch (erro) {
 		console.error('Falha ao logar usuário: ', erro);
-		return { status: false, mensagem: erro };
+		return null;
 	}
 }
