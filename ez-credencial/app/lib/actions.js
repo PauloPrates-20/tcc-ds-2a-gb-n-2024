@@ -82,8 +82,8 @@ export async function autenticar(dados) {
     try {
         await signIn('credentials', { ...dados, redirect: false });
     } catch (erro) {
-        console.error('Falha na autenticação: ', erro);
-        return { ok: false, erro: 'Falha na autenticação. Verifique suas credenciais e tente novamente.' };
+        console.error(erro);
+        return { ok: false, erro: erro.message };
     }
 
     return { ok: true };
