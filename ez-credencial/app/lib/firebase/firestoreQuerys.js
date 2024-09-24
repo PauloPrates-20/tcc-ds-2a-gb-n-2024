@@ -79,7 +79,9 @@ export async function logarUsuario(credenciais) {
 				mensagem: 'Usuário logado com sucesso',
 				usuario: { id: doc.id, data: doc.data}
 			};
-		} else return { status: false, mensagem: 'Usuário ou senha incorretos' };
+		}
+
+        return { status: false, mensagem: 'Usuário ou senha incorretos' };
 	} catch (erro) {
 		console.error('Falha ao logar usuário: ', erro);
 		return { status: false, mensagem: erro };

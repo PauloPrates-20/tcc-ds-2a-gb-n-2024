@@ -1,6 +1,6 @@
 'use server';
 import { lerUsuarios, cadastrarUsuario } from '@/app/lib/firebase/firestoreQuerys';
-import { signOut } from '@/auth';
+import { signIn, signOut } from '@/auth';
 
 // Verifica se os dados do formulário de cadastro estão corretos
 export async function validarCadastro(dadosUsuario) {
@@ -75,6 +75,18 @@ export async function cadastrar(dadosUsuario) {
 
     const resposta = await cadastrarUsuario(dadosUsuario);
     return resposta;
+}
+
+// Ação para autenticar o usuário
+export async function autenticar(dados) {
+    try {
+        await signIn('credentials', { ...dados, redirect: false });
+    } catch (erro) {
+        console.error('Falha na autenticação: ', erro);
+        return { ok: false, erro: 'Falha na autenticação. Verifique suas credenciais e tente novamente.' };
+    }
+
+    return { ok: true };
 }
 
 // Ação para deslogar o usuário

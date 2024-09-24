@@ -1,6 +1,7 @@
 export const authConfig = {
 	pages: {
 		signIn: '/login',
+		error: '/login',
 	},
 	callbacks: {
 		authorized({ auth, request: { nextUrl } }) {

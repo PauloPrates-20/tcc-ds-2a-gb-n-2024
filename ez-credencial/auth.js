@@ -8,6 +8,7 @@ export const { auth, signIn, signOut } = NextAuth({
 	providers: [Credentials({
 		async authorize(credentials) {
 				const resposta = await logarUsuario(credentials);
+				
 				if (!resposta.status) return null;
 
 				return resposta.usuario;
