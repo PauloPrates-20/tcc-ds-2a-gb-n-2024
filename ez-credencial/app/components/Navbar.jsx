@@ -1,5 +1,7 @@
 'use client';
 
+import icon from '@/public/assets/logo.png';
+import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/styles/Navbar.module.css';
 import { usePathname } from 'next/navigation';
@@ -11,8 +13,15 @@ export default function Navbar() {
     <nav className={styles.navbar}>
         <ul>
             <div className={styles.nav}>
-                <li className={styles.logo}>Logo</li>
                 <li>
+                    <Image 
+                        src={icon}
+                        width={52}
+                        height={52}
+                        alt=''
+                    />
+                </li>
+                <li className={styles.link}>
                     <Link className={styles.link} href="/dashboard">Início</Link>
                 </li>
             </div>
@@ -27,7 +36,14 @@ export default function Navbar() {
         componente = (
         <nav className={styles.navbar}>
             <ul>
-                <li className={styles.logo}>Logo</li>
+                <li>
+                    <Image 
+                        src={icon}
+                        width={52}
+                        height={52}
+                        alt=''
+                    />
+                </li>
                 <li>
                     <Link className={styles.link} href="/login">Início</Link>
                 </li>
