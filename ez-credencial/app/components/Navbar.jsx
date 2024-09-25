@@ -1,6 +1,6 @@
 'use client';
 
-import icon from '@/public/assets/logo.png';
+import icon from '@/public/assets/logo2.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/styles/Navbar.module.css';
@@ -16,8 +16,8 @@ export default function Navbar() {
                 <li>
                     <Image 
                         src={icon}
-                        width={52}
-                        height={52}
+                        width={64}
+                        height={64}
                         alt=''
                     />
                 </li>
@@ -39,8 +39,8 @@ export default function Navbar() {
                 <li>
                     <Image 
                         src={icon}
-                        width={52}
-                        height={52}
+                        width={64}
+                        height={64}
                         alt=''
                     />
                 </li>
