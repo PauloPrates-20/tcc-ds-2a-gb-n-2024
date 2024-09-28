@@ -39,12 +39,14 @@ export default function Navbar() {
         <nav className={styles.navbar}>
             <ul>
                 <li>
+									<Link href='/login'>
                     <Image 
                         src={icon}
                         width={64}
                         height={64}
                         alt=''
                     />
+									</Link>
                 </li>
                 <li>
                     <Link className={styles.link} href="/login">Início</Link>
