@@ -3,9 +3,9 @@
 
     font-size: 1.8rem;
     font-weight: bold;
-    color: #fff;
+    color: var(--corTexto);
 
-    background-color: #333;
+    background-color: var(--corBotoes);
 
     padding: 1rem 3rem;
     width: fit-content;

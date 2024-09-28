@@ -6,4 +6,15 @@
 
 :root {
   font-size: 62.5%;
+  --corBackground: #effafa;
+  --corBotoes: #2c6a68;
+  --corNav: #ffffff;
+  --corTexto: #ffffff;
+  --corThrash: #333333;
+  --corAction: #284144;
+  --corEntradas: #49adaa;
+}
+
+body {
+  background-color: var(--corBackground);
 }

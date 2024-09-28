@@ -17,11 +17,6 @@
 
 .moldura p {
     padding: 3rem;
-    cursor: pointer;
-}
-
-.moldura p:active {
-    cursor: default ;
 }
 
 .titulo {
@@ -41,8 +36,14 @@
 .icone {
     cursor: pointer;
     font-size: 2rem;
+    text-decoration: none;
+    color: #333;
 }
 
 .icone:active {
     cursor: default;
+}
+
+.link {
+    z-index: 10;
 }

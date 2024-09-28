@@ -3,17 +3,17 @@
   width: 40rem;
   height: 3.8rem;
 
-  border: .1rem solid #bbb;
+  border: .1rem solid var(--corEntradas);
   border-radius: 3rem;
 
   display: block;
 
   margin: 3rem 0;
 
-  background-color: #bbb;
-  color: #fff;
+  background-color: var(--corEntradas);
+  color: var(--corTexto);
 }
 
 .entrada::placeholder {
-  color: #fff;
+  color: var(--corTexto);
 }

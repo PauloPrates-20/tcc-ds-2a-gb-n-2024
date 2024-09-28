@@ -14,11 +14,6 @@
   align-items: center;
   flex-shrink: 0;
 
-  cursor: pointer;
-}
-
-.moldura:active {
-  cursor: default;
 }
 
 .titulo {
@@ -26,6 +21,6 @@
 }
 
 .icone {
-  font-size: 7rem;
+  font-size: 5rem;
   font-weight: lighter;
 }

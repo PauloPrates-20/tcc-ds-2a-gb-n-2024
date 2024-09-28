@@ -7,7 +7,7 @@ export const metadata = {
     title: 'Novo Evento',
 };
 
-export default function AddEvento() {
+export default function EditarEvento({ params }) {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -18,7 +18,7 @@ export default function AddEvento() {
                 />
                 <p>EVENTO</p>
             </div>
-            <FormEvento />
+            <FormEvento editar={true} idEvento={params.id} />
         </div>
     );
 }

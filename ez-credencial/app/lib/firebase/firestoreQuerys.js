@@ -16,7 +16,10 @@ const bd = getFirestore(app);
 // Definição do caminho das coleções
 const caminhos = {
     usuarios: 'Usuario',
+    eventos: 'Eventos',
 };
+
+/* Usuários */
 
 // Função para gravar o documento usuário no banco de dados
 export async function cadastrarUsuario(dadosUsuario) {
@@ -24,7 +27,6 @@ export async function cadastrarUsuario(dadosUsuario) {
     const usuario = {
         cnpj: dadosUsuario.cnpj,
         email: dadosUsuario.email,
-        eventos: [],
         nome: dadosUsuario.nome,
         senha: dadosUsuario.senha,
         status: false,
@@ -75,7 +77,7 @@ export async function logarUsuario(credenciais) {
 
 			// Verifica se a senha digitada é igual a senha cadastrada para o login
 			if (doc.data().senha === credenciais.senha) {
-                const user = {id: doc.id, data: doc.data()};
+                const user = { id: doc.id, nome: doc.data().nome };
 
                 return user;
             }
@@ -86,4 +88,29 @@ export async function logarUsuario(credenciais) {
 		console.error('Falha ao logar usuário: ', erro);
 		return null;
 	}
+}
+
+/* Eventos */
+
+// Função para adicionar evento
+export async function adicionarEvento(idUsuario, dados) {
+    const resposta = { status: true };
+    const evento = {
+        data: dados.data,
+        local: dados.local,
+        nome: dados.nome,
+    };
+
+    try {
+        await addDoc(collection(bd, caminhos.usuarios, idUsuario, caminhos.eventos), evento);
+
+        resposta.mensagem = 'Evento adicionado com sucesso.';
+    } catch (erro) {
+        console.error('Falha ao adicionar evento:', erro);
+
+        resposta.status = false;
+        resposta.mensagem = 'Error ao adicionar evento';
+    }
+
+    return resposta;
 }

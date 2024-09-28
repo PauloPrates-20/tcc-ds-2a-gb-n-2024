@@ -22,7 +22,7 @@
 }
 
 .moldura {
-    background-color: black;
+    background-color: var(--corBotoes);
 
     width: 100%;
 
@@ -33,12 +33,12 @@
     width: 100%;
     min-height: 30vh;
     
-    background-color: black;
-    color: white
+    background-color: var(--corBotoes);
+    color: var(--corTexto);
 }
 
 .moldura > div:nth-child(1) > p {
-    background-color: white;
+    background-color: var(--corTexto);
     color: #222;
 }
 

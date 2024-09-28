@@ -14,18 +14,20 @@ export default function Navbar() {
         <ul>
             <div className={styles.nav}>
                 <li>
-                    <Image 
-                        src={icon}
-                        width={64}
-                        height={64}
-                        alt=''
-                    />
+                    <Link href='/dashboard'>
+                        <Image 
+                            src={icon}
+                            width={64}
+                            height={64}
+                            alt=''
+                        />
+                    </Link>
                 </li>
                 <li className={styles.link}>
                     <Link className={styles.link} href="/dashboard">Início</Link>
                 </li>
             </div>
-            <li>
+            <li className={styles.nav}>
 				<Logout />
             </li>
         </ul>

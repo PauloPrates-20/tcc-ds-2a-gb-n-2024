@@ -3,7 +3,7 @@
     flex-direction: row;
     width: 100%;
 
-    background-color: #999;
+    background-color: var(--corBotoes);
     color: #fff;
 }
 
@@ -28,10 +28,10 @@
 
 .link {
     text-decoration: none;
-    color: #fff;
+    color: var(--corBotoes);
     padding: 1rem 2rem;
     border-radius: 1rem;
-    background-color: #333;
+    background-color: var(--corTexto);
 }
 
 .link:active {
