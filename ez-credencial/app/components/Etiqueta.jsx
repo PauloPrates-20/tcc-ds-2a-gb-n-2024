@@ -1,7 +1,9 @@
 import styles from "@/styles/Etiqueta.module.css";
 
-export default function Separador({ children }) {
+export default function Separador({ children, corFundo, corTexto }) {
 	return (
-		<p className={styles.tag}>{children}</p>
+		<p style={{ backgroundColor: corFundo ? corFundo : '#2c6a68', color: corTexto ? corTexto : '#fff' }} className={styles.tag}>
+			{children}
+		</p>
 	);
 }
