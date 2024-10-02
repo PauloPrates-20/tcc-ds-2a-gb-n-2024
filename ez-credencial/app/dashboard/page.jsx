@@ -12,9 +12,6 @@ export const metadata = {
 };
 
 export default async function Dashboard() {
-  const session = await auth();
-  console.log(session);
-
   return (
     <div className={styles.container}>
       <BotaoNav url='/dashboard/adicionar-evento'>Adicionar evento <FaRegPenToSquare /></BotaoNav>

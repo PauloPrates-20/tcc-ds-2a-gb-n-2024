@@ -78,7 +78,6 @@ export async function logarUsuario(credenciais) {
 			// Verifica se a senha digitada é igual a senha cadastrada para o login
 			if (doc.data().senha === credenciais.senha) {
                 const user = { id: doc.id, email: doc.data().email, name: doc.data().nome };
-                console.log(user);
 
                 return user;
             }
