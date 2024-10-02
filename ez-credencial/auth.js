@@ -17,4 +17,21 @@ export const { auth, signIn, signOut } = NextAuth({
 			},
 		}),
 	],
+	session: {
+		jwt: true,
+		maxAge: 30 * 24 * 60 * 60,
+	},
+	callbacks: {
+		async session({ session, token }) {
+			session.user = token.user;
+			return session;
+		},
+		async jwt({ token, user }) {
+			if (user) {
+				token.user = user;
+			}
+
+			return token;
+		},
+	},
 });

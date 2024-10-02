@@ -5,12 +5,16 @@ import usuario from '@/public/teste-usuario';
 import { FaRegPenToSquare } from 'react-icons/fa6'
 import styles from '@/styles/Dashboard.module.css';
 import CardRelatorio from '@/app/components/CardRelatorio';
+import { auth } from '@/auth';
 
 export const metadata = {
   title: 'Dashboard',
 };
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const session = await auth();
+  console.log(session);
+
   return (
     <div className={styles.container}>
       <BotaoNav url='/dashboard/adicionar-evento'>Adicionar evento <FaRegPenToSquare /></BotaoNav>
