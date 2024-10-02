@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Moldura({ titulo, children, voltar, idEvento }) {
     return (
         <div className={styles.detalhes}>
-            <Etiqueta>{titulo}</Etiqueta>
+            <Etiqueta corFundo='#fff' corTexto='#2c6a68'>{titulo}</Etiqueta>
             <div className={styles.texto}>
                 <p>{children}</p>
             </div>
