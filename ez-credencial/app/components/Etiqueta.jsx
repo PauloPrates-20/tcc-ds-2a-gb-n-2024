@@ -1,4 +1,4 @@
-import styles from "@/styles/Etiqueta.module.css";
+import styles from '@/styles/Etiqueta.module.css';
 
 export default function Separador({ children, corFundo, corTexto }) {
 	return (

@@ -1,7 +1,7 @@
-import Image from "next/image";
-import styles from "@/styles/Cadastro.module.css";
-import icon from "@/public/assets/cadastro-funcionario.png";
-import FormFuncionario from "@/app/components/FormFuncionario";
+import Image from 'next/image';
+import styles from '@/styles/Cadastro.module.css';
+import icon from '@/public/assets/cadastro-funcionario.png';
+import FormFuncionario from '@/app/components/FormFuncionario';
 
 export default function CadastroFuncionario() {
     return (
@@ -10,7 +10,7 @@ export default function CadastroFuncionario() {
                 <Image 
                     src={icon}
                     width={180}
-                    alt="Logo"
+                    alt='Logo'
                 />
                 <p>FUNCIONARIO</p>
             </div>

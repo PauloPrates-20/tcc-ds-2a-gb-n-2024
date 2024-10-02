@@ -1,4 +1,4 @@
-import styles from "@/styles/Entrada.module.css";
+import styles from '@/styles/Entrada.module.css';
 
 export default function Entrada({ nome, tipo, children, disable }) {
 	return (

@@ -1,9 +1,9 @@
 'use client';
 
-import { FaRegTrashCan, FaRegPenToSquare, FaRegFolderOpen } from "react-icons/fa6";
+import { FaRegTrashCan, FaRegPenToSquare, FaRegFolderOpen } from 'react-icons/fa6';
 
-import styles from "@/styles/CardEvento.module.css";
-import Link from "next/link";
+import styles from '@/styles/CardEvento.module.css';
+import Link from 'next/link';
 
 export default function CardEvento({ evento }) {
     return (

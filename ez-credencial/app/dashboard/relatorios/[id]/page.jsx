@@ -1,9 +1,9 @@
-import Image from "next/image";
-import Etiqueta from "@/app/components/Etiqueta";
+import Image from 'next/image';
+import Etiqueta from '@/app/components/Etiqueta';
 
-import icon from "@/public/assets/relatorio.png";
+import icon from '@/public/assets/relatorio.png';
 
-import styles from "@/styles/Relatorio.module.css";
+import styles from '@/styles/Relatorio.module.css';
 
 export default function Relatorio() {
 	return (
@@ -13,7 +13,7 @@ export default function Relatorio() {
 					<Image
 						src={icon}
 						width={148}
-						alt="Logo"
+						alt='Logo'
 					/>
 					<h1>RELATÓRIO</h1>
 				</div>

@@ -1,6 +1,6 @@
-import { FaRegFileLines } from "react-icons/fa6";
+import { FaRegFileLines } from 'react-icons/fa6';
 
-import styles from "@/styles/CardRelatorio.module.css";
+import styles from '@/styles/CardRelatorio.module.css';
 
 export default function CardRelatorio({ titulo }) {
   return (
