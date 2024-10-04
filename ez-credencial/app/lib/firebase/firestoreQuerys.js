@@ -22,7 +22,7 @@ const caminhos = {
 // Funções de usuário
 // Função para gravar o documento usuário no banco de dados
 export async function cadastrarUsuario(dadosUsuario) {
-    let resposta = { status: true };
+    const resposta = { status: true, erros: {} };
     const usuario = {
         cnpj: dadosUsuario.cnpj,
         email: dadosUsuario.email,
@@ -38,7 +38,7 @@ export async function cadastrarUsuario(dadosUsuario) {
         resposta.mensagem = `Usuário cadastrado com sucesso.`
     } catch (erro) {
         resposta.status = false;
-        resposta.mensagem = `Erro de banco de dados: ${erro}`;
+        resposta.erros.bd = `Erro de banco de dados: ${erro}`;
     }
 
     return resposta;
@@ -46,18 +46,29 @@ export async function cadastrarUsuario(dadosUsuario) {
 
 // Função para ler todos os usuários do banco de dados
 export async function lerUsuarios() {
-    const query = await getDocs(collection(bd, caminhos.usuarios));
-    const usuarios = [];
-    query.forEach(usuario => {
-        usuarios.push(usuario.data());
-    })
+    const resposta = { status: true, erros: {} };
 
-    return usuarios;
+    try {
+        const querySnapshot = await getDocs(collection(bd, caminhos.usuarios));
+        const usuarios = [];
+        querySnapshot.forEach(usuario => {
+            usuarios.push(usuario.data());
+        });
+
+        resposta.usuarios = usuarios;
+        resposta.mensagem = 'Usuários lidos com sucesso';
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+
+    return resposta;
 }
 
 // Função para recuperar o usuário e comparar a senha
 // Credenciais = { usuario, senha }
 export async function logarUsuario(credenciais) {
+    const resposta = { status: true, erros: {} };
 	// Query para encontrar o usuário por email ou cnpj
 	const q = query(
 		collection(bd, caminhos.usuarios),
@@ -76,17 +87,23 @@ export async function logarUsuario(credenciais) {
 
 			// Verifica se a senha digitada é igual a senha cadastrada para o login
 			if (doc.data().senha === credenciais.senha) {
-                const user = { id: doc.id, email: doc.data().email, name: doc.data().nome };
+                const usuario = { id: doc.id, email: doc.data().email, name: doc.data().nome };
 
-                return user;
+                resposta.usuario = usuario;
+                resposta.mensagem = 'Usuário autenticado com sucesso.';
+
+                return resposta;
             }
 		}
 
-        return null;
+        resposta.status = false;
+        resposta.erros.credenciais = `Usuário ou senha incorretos`;
 	} catch (erro) {
-		console.error('Falha ao logar usuário: ', erro);
-		return null;
+		resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
 	}
+
+    return resposta;
 }
 
 /* Eventos */

@@ -7,13 +7,13 @@ export const { auth, signIn, signOut } = NextAuth({
 	...authConfig,
 	providers: [Credentials({
 		async authorize(credentials) {
-				const user = await logarUsuario(credentials);
+				const resposta = await logarUsuario(credentials);
 
-				if (!user) {
-					throw new Error('Falha na autenticação. Verifique as credenciais inseridas e tente novamente.');
+				if (!resposta.status) {
+					throw new Error(resposta.erros?.credenciais || resposta.erros?.bd);
 				}
 
-				return user;
+				return resposta.usuario;
 			},
 		}),
 	],
