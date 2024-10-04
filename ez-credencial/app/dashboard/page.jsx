@@ -14,16 +14,16 @@ export const metadata = {
 
 export default async function Dashboard() {
   const session = await auth();
-  const { id } = session.user;
-  const eventos = await lerEventos(id);
+  const idUsuario = session.user.id;
+  const queryEventos = await lerEventos(idUsuario);
 
   return (
     <div className={styles.container}>
       <BotaoNav url='/dashboard/adicionar-evento'>Adicionar evento <FaRegPenToSquare /></BotaoNav>
 
       <div className={styles.listas}>
-        {eventos.map((evento) => (
-          <CardEvento key={evento.id} evento={evento} idUsuario={id} />
+        {queryEventos.status && queryEventos.eventos.map((evento) => (
+          <CardEvento key={evento.id} evento={evento} idUsuario={idUsuario} />
         ))}  
       </div>
 

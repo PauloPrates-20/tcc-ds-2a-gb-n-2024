@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection, getDocs, query, where, or, orderBy, deleteDoc, doc } from 'firebase/firestore';
+import { getFirestore, addDoc, collection, getDocs, query, where, or, orderBy, deleteDoc, doc, getDoc } from 'firebase/firestore';
 
 // Configuração do banco de dados
 const firebaseConfig = {
@@ -115,20 +115,48 @@ export async function adicionarEvento(idUsuario, dados) {
 }
 
 // Funções de evento
-// Função para ler os eventos do usuário
+// Função para ler todos os eventos do usuário
 export async function lerEventos(idUsuario) {
     const caminho = collection(bd, caminhos.usuarios, idUsuario, caminhos.eventos);
     const q = query(
         caminho,
         orderBy('nome')
     );
-    const querySnapshot = await getDocs(q);
-    const eventos = []
-    querySnapshot.forEach(evento => {
-        eventos.push({ id: evento.id, dados: evento.data() });
-    })
+    const resposta = { status: true, erros: {} };
+    try {
+        const querySnapshot = await getDocs(q);
+        const eventos = []
+        querySnapshot.forEach(evento => {
+            eventos.push({ id: evento.id, dados: evento.data() });
+        })
 
-    return eventos;
+        resposta.eventos = eventos;
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+
+    return resposta;
+}
+
+// Função para ler um evento do usuário 
+export async function lerEvento(idUsuario, idEvento) {
+    const caminho = doc(bd, caminhos.usuarios, idUsuario, caminhos.eventos, idEvento);
+    const resposta = { status: true, erros: {} };
+
+    try {
+        const querySnapshot = await getDoc(caminho);
+        const evento = { 
+            id: querySnapshot.id,
+            dados: querySnapshot.data(),
+        };
+        resposta.evento = evento;
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+
+    return resposta;
 }
 
 // Função para gravar eventos do usuário
@@ -148,7 +176,7 @@ export async function gravarEvento(idUsuario, dados) {
         resposta.mensagem = 'Evento criado com sucesso.';
     } catch (erro) {
         resposta.status = false;
-        resposta.mensagem = `Erro de banco de dados: ${erro.message}`;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
     return resposta;
@@ -156,7 +184,7 @@ export async function gravarEvento(idUsuario, dados) {
 
 export async function excluirEvento(idUsuario, idEvento) {
     const caminho = doc(bd, caminhos.usuarios, idUsuario, caminhos.eventos, idEvento);
-    const resposta = { status: true };
+    const resposta = { status: true, erros: {} };
 
     try {
         await deleteDoc(caminho);
@@ -164,7 +192,7 @@ export async function excluirEvento(idUsuario, idEvento) {
         resposta.mensagem = 'Evento excluído com sucesso.';
     } catch (erro) {
         resposta.status = false;
-        resposta.mensagem = `Erro ao excluir evento: ${erro.message}`;
+        resposta.erros.bd = `Erro ao excluir evento: ${erro.message}`;
     }
 
     return resposta;
