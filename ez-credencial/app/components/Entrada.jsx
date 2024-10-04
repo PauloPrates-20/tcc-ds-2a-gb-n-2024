@@ -1,6 +1,6 @@
 import styles from '@/styles/Entrada.module.css';
 
-export default function Entrada({ nome, tipo, children, disable }) {
+export default function Entrada({ nome, tipo, children, disable, valor }) {
 	return (
 		<input 
 			className={styles.entrada}
@@ -8,6 +8,7 @@ export default function Entrada({ nome, tipo, children, disable }) {
 			placeholder={children}
 			name={nome}
 			disabled={disable ? disable : false}
+			value={valor ? valor : ''}
 		/>
 	);
 }

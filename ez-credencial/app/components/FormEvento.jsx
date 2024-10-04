@@ -7,7 +7,7 @@ import Entrada from './Entrada';
 import BotaoForm from './BotaoForm';
 import BotaoNav from './BotaoNav';
 
-export default function FormEvento({ editar, idEvento, idUsuario }) {
+export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
     const searchParams = useSearchParams();
     const dashboard = searchParams.get('dashboard') || false;
     const router = useRouter();
@@ -38,9 +38,24 @@ export default function FormEvento({ editar, idEvento, idUsuario }) {
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.entradas}>
-                <Entrada nome='nome'>NOME DO EVENTO</Entrada>
-                <Entrada nome='horario'>DATA</Entrada>
-                <Entrada nome='local'>LOCAL</Entrada>
+                <Entrada 
+                    nome='nome' 
+                    valor={editar ? dados.nome : null}
+                >
+                    NOME DO EVENTO
+                </Entrada>
+                <Entrada 
+                    nome='horario'
+                    valor={editar ? dados.horario : null}
+                >
+                    DATA
+                </Entrada>
+                <Entrada 
+                    nome='local'
+                    valor={editar ? dados.local : null}
+                >
+                    LOCAL
+                </Entrada>
             </div>
             {editar ? (
                 <>
