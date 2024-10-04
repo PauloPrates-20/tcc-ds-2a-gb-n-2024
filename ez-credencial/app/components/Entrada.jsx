@@ -8,7 +8,7 @@ export default function Entrada({ nome, tipo, children, disable, valor }) {
 			placeholder={children}
 			name={nome}
 			disabled={disable ? disable : false}
-			value={valor ? valor : ''}
+			defaultValue={valor ? valor : ''}
 		/>
 	);
 }
