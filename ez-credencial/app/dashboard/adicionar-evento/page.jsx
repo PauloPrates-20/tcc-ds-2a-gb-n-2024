@@ -2,12 +2,16 @@ import Image from 'next/image';
 import icon from '@/public/assets/evento.png';
 import styles from '@/styles/AddEvento.module.css';
 import FormEvento from '@/app/components/FormEvento';
+import { auth } from '@/auth';
 
 export const metadata = {
     title: 'Novo Evento',
 };
 
-export default function AddEvento() {
+export default async function AddEvento() {
+    const session = await auth();
+    const { id } = session.user;
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -18,7 +22,7 @@ export default function AddEvento() {
                 />
                 <p>EVENTO</p>
             </div>
-            <FormEvento />
+            <FormEvento idUsuario={id} />
         </div>
     );
 }
