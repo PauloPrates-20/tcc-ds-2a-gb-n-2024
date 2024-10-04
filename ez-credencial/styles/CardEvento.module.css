@@ -38,6 +38,8 @@
     font-size: 2rem;
     text-decoration: none;
     color: #333;
+    border: none;
+    background-color: transparent;
 }
 
 .icone:active {
