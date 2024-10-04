@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection, getDocs, query, where, or } from 'firebase/firestore';
+import { getFirestore, addDoc, collection, getDocs, query, where, or, orderBy, deleteDoc, doc } from 'firebase/firestore';
 
 // Configuração do banco de dados
 const firebaseConfig = {
@@ -19,8 +19,7 @@ const caminhos = {
     eventos: 'Eventos',
 };
 
-/* Usuários */
-
+// Funções de usuário
 // Função para gravar o documento usuário no banco de dados
 export async function cadastrarUsuario(dadosUsuario) {
     let resposta = { status: true };
@@ -110,6 +109,62 @@ export async function adicionarEvento(idUsuario, dados) {
 
         resposta.status = false;
         resposta.mensagem = 'Error ao adicionar evento';
+    }
+
+    return resposta;
+}
+
+// Funções de evento
+// Função para ler os eventos do usuário
+export async function lerEventos(idUsuario) {
+    const caminho = collection(bd, caminhos.usuarios, idUsuario, caminhos.eventos);
+    const q = query(
+        caminho,
+        orderBy('nome')
+    );
+    const querySnapshot = await getDocs(q);
+    const eventos = []
+    querySnapshot.forEach(evento => {
+        eventos.push({ id: evento.id, dados: evento.data() });
+    })
+
+    return eventos;
+}
+
+// Função para gravar eventos do usuário
+export async function gravarEvento(idUsuario, dados) {
+    const caminho = collection(bd, caminhos.usuarios, idUsuario, caminhos.eventos);
+    const resposta = { status: true };
+
+    const evento = {
+        horario: dados.horario,
+        local: dados.local,
+        nome: dados.nome,
+    };
+    
+    try {
+        await addDoc(caminho, evento);
+
+        resposta.mensagem = 'Evento criado com sucesso.';
+    } catch (erro) {
+        resposta.status = false;
+        resposta.mensagem = `Erro de banco de dados: ${erro.message}`;
+    }
+
+    return resposta;
+}
+
+export async function excluirEvento(idUsuario, idEvento) {
+    const caminho = doc(bd, caminhos.usuarios, idUsuario, caminhos.eventos, idEvento);
+    const resposta = { status: true };
+
+    try {
+        await deleteDoc(caminho);
+
+        resposta.mensagem = 'Evento excluído com sucesso.';
+    } catch (erro) {
+        resposta.status = false;
+        resposta.mensagem = `Erro ao excluir evento: ${erro.message}`;
     }
 
     return resposta;

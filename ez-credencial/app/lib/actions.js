@@ -1,8 +1,10 @@
 'use server';
-import { lerUsuarios, cadastrarUsuario } from '@/app/lib/firebase/firestoreQuerys';
+import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento } from '@/app/lib/firebase/firestoreQuerys';
 import { signIn, signOut } from '@/auth';
+import { revalidatePath } from 'next/cache';
 
-// Verifica se os dados do formulário de cadastro estão corretos
+// Validações
+// Verifica se os dados do formulário de cadastro de usuário estão corretos
 export async function validarCadastro(dadosUsuario) {
     const validacao = { status: true, erros: {} };
 
@@ -45,6 +47,27 @@ export async function validarCadastro(dadosUsuario) {
     return validacao;
 }
 
+export async function validarEvento(dadosEvento) {
+    const validacao = { status: true, erros: {} };
+
+    if (!dadosEvento?.horario) {
+        validacao.status = false;
+        validacao.erros.horario = 'Campo horário não pode estar vazio';
+    }
+
+    if (!dadosEvento?.local) {
+        validacao.status = false;
+        validacao.erros.local = 'Campo local não pode estar vazio';
+    }
+
+    if (!dadosEvento?.nome) {
+        validacao.status = false;
+        validacao.erros.nome = 'Campo nome não pode estar vazio';
+    }
+
+    return validacao;
+}
+
 // Verifica se o usuário já existe no banco de dados
 export async function validarUsuario(cnpj, email) {
     const usuarios = await lerUsuarios();
@@ -77,6 +100,7 @@ export async function cadastrar(dadosUsuario) {
     return resposta;
 }
 
+// Ações de autenticação
 // Ação para autenticar o usuário
 export async function autenticar(dados) {
     try {
@@ -90,7 +114,27 @@ export async function autenticar(dados) {
 }
 
 // Ação para deslogar o usuário
-// Precisou ser criada para evitar conflitos entre componentes de client e servidor
 export async function deslogar() {
 	await signOut({ redirectTo: '/login' });
+}
+
+// Ações de eventos
+// Ação para criar eventos
+export async function criarEvento(idUsuario, dados) {
+    const validacao = await validarEvento(dados);
+
+    if (!validacao.status) {
+        return validacao.erros;
+    }
+
+    const resposta = await gravarEvento(idUsuario, dados);
+    return resposta;
+}
+
+// Ação para deletar eventos
+export async function deletarEvento(idUsuario, idEvento) {
+    const resposta = await excluirEvento(idUsuario, idEvento);
+    revalidatePath('/dashboard');
+
+    return resposta;
 }
