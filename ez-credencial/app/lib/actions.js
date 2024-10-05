@@ -128,6 +128,11 @@ export async function criarEvento(idUsuario, dados) {
     }
 
     const resposta = await gravarEvento(idUsuario, dados);
+
+		if (resposta.status) {
+			revalidatePath('/dashboard');
+		}
+		
     return resposta;
 }
 
