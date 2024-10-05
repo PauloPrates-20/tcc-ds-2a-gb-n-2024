@@ -6,7 +6,7 @@ import { auth } from '@/auth';
 import { lerEvento } from '@/app/lib/firebase/firestoreQuerys';
 
 export const metadata = {
-    title: 'Novo Evento',
+    title: 'Editar Evento',
 };
 
 export default async function EditarEvento({ params }) {
