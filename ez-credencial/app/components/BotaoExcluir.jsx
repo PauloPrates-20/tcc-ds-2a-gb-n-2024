@@ -11,10 +11,10 @@ export default function BotaoExcluir({ idUsuario, idAlvo, tipoAlvo }) {
 	async function deletar() {
 		let resposta = null;
 
+		router.push('/dashboard');
 		switch(tipoAlvo) {
 			case 'evento':
 				resposta = await deletarEvento(idUsuario, idAlvo);
-				router.push('/dashboard');
 				break;
 		}
 
