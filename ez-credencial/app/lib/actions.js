@@ -1,5 +1,5 @@
 'use server';
-import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento } from '@/app/lib/firebase/firestoreQuerys';
+import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento } from '@/app/lib/firebase/firestoreQuerys';
 import { signIn, signOut } from '@/auth';
 import { revalidatePath } from 'next/cache';
 
@@ -142,4 +142,23 @@ export async function deletarEvento(idUsuario, idEvento) {
     revalidatePath('/dashboard');
 
     return resposta;
+}
+
+// Ação para editar eventos
+export async function editarEvento(idUsuario, idEvento, dados, dashboard) {
+	const respostaValidacao = await validarEvento(dados);
+
+	if (!respostaValidacao.status) {
+		console.error(respostaValidacao.erros);
+		return respostaValidacao;
+	}
+
+	const resposta = await atualizarEvento(idUsuario, idEvento, dados);
+
+	if (resposta.status) {
+		const url = dashboard ? '/dashboard' : `/dashboard/eventos/${idEvento}`;
+		revalidatePath(url);
+	}
+
+	return resposta;
 }

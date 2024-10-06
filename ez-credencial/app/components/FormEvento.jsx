@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { criarEvento } from '../lib/actions';
+import { criarEvento, editarEvento } from '../lib/actions';
 import styles from '@/styles/FormEvento.module.css';
 import Entrada from './Entrada';
 import BotaoForm from './BotaoForm';
@@ -21,10 +21,9 @@ export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
             local: formData.get('local'),
             nome: formData.get('nome'), 
         };
-        if (editar) {
-        }
+				const url = editar ? (dashboard ? '/dashboard' : `/dashboard/eventos/${idEvento}`) : '/dashboard';
+				const resposta = editar ? await editarEvento(idUsuario, idEvento, dadosEvento, dashboard) : await criarEvento(idUsuario, dadosEvento);
 
-        const resposta = await criarEvento(idUsuario, dadosEvento);
 
         if (!resposta.status) {
             console.error(resposta.mensagem ? resposta.mensagem : resposta);
@@ -32,7 +31,7 @@ export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
         }
 
         console.log(resposta.mensagem);
-        router.push('/dashboard');
+        router.push(url);
     }
     
     return (

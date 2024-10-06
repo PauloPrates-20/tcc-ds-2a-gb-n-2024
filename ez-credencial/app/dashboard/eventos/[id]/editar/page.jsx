@@ -29,7 +29,7 @@ export default async function EditarEvento({ params }) {
                 />
                 <p>EVENTO</p>
             </div>
-            <FormEvento editar={true} idEvento={evento.id} dados={evento.dados} />
+            <FormEvento editar={true} idEvento={evento.id} idUsuario={idUsuario} dados={evento.dados} />
         </div>
     );
 }

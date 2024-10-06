@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection, getDocs, query, where, or, orderBy, deleteDoc, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, addDoc, collection, getDocs, query, where, or, orderBy, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 
 // Configuração do banco de dados
 const firebaseConfig = {
@@ -213,4 +213,20 @@ export async function excluirEvento(idUsuario, idEvento) {
     }
 
     return resposta;
+}
+
+export async function atualizarEvento(idUsuario, idEvento, dados) {
+	const caminho = doc(bd, caminhos.usuarios, idUsuario, caminhos.eventos, idEvento);
+	const resposta = { status: true, erros: {} };
+
+	try {
+		await updateDoc(caminho, dados);
+
+		resposta.mensagem = 'Evento editado com sucesso.';
+	} catch (erro) {
+		resposta.status = false;
+		resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+	}
+
+	return resposta;
 }
