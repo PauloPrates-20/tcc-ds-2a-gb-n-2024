@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation';
 import { criarEvento, editarEvento } from '../lib/actions';
-import styles from '@/styles/FormEvento.module.css';
+import styles from '@/styles/FormPadrao.module.css';
 import Entrada from './Entrada';
 import BotaoForm from './BotaoForm';
 import BotaoNav from './BotaoNav';
