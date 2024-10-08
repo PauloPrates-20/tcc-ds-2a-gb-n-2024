@@ -31,7 +31,6 @@
 
 .moldura div {
     width: 100%;
-    min-height: 30vh;
     
     background-color: var(--corBotoes);
     color: var(--corTexto);

@@ -18,7 +18,7 @@ export default async function Evento({ params }) {
 		<div className={styles.container}>
 			<div className={styles.info}>
 				<div className={styles.moldura}>
-					<Moldura titulo='EVENTO' voltar={true} idEvento={evento?.id} idUsuario={idUsuario}>
+					<Moldura titulo='EVENTO' evento={true} idEvento={evento?.id} idUsuario={idUsuario}>
 						<h1>{evento?.dados?.nome}</h1>
 						<p>DATA: {evento?.dados?.horario}</p>
 						<p>Local: {evento?.dados?.local}</p>
