@@ -10,7 +10,7 @@ export const metadata = {
 
 export default async function AddEvento() {
     const session = await auth();
-    const { id } = session.user;
+    const idUsuario = session.user.id;
 
     return (
         <div className={styles.container}>
@@ -22,7 +22,7 @@ export default async function AddEvento() {
                 />
                 <p>EVENTO</p>
             </div>
-            <FormEvento idUsuario={id} />
+            <FormEvento idUsuario={idUsuario} />
         </div>
     );
 }

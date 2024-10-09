@@ -50,9 +50,9 @@ export async function validarCadastro(dadosUsuario) {
 export async function validarEvento(dadosEvento) {
     const validacao = { status: true, erros: {} };
 
-    if (!dadosEvento?.horario) {
+    if (!dadosEvento?.data) {
         validacao.status = false;
-        validacao.erros.horario = 'Campo horário não pode estar vazio';
+        validacao.erros.data = 'Campo horário não pode estar vazio';
     }
 
     if (!dadosEvento?.local) {
@@ -145,7 +145,7 @@ export async function deletarEvento(idUsuario, idEvento) {
 }
 
 // Ação para editar eventos
-export async function editarEvento(idUsuario, idEvento, dados, dashboard) {
+export async function editarEvento(idEvento, dados, dashboard) {
 	const respostaValidacao = await validarEvento(dados);
 
 	if (!respostaValidacao.status) {
@@ -153,7 +153,7 @@ export async function editarEvento(idUsuario, idEvento, dados, dashboard) {
 		return respostaValidacao;
 	}
 
-	const resposta = await atualizarEvento(idUsuario, idEvento, dados);
+	const resposta = await atualizarEvento(idEvento, dados);
 
 	if (resposta.status) {
 		const url = dashboard ? '/dashboard' : `/dashboard/eventos/${idEvento}`;
