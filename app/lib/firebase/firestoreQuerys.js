@@ -17,6 +17,8 @@ const bd = getFirestore(app);
 const caminhos = {
     usuarios: 'Usuario',
     eventos: 'Eventos',
+    empresas: 'Empresas',
+    funcionarios: 'Funcionarios',
 };
 
 // Funções de usuário
@@ -106,40 +108,17 @@ export async function logarUsuario(credenciais) {
     return resposta;
 }
 
-/* Eventos */
-
-// Função para adicionar evento
-export async function adicionarEvento(idUsuario, dados) {
-    const resposta = { status: true };
-    const evento = {
-        data: dados.data,
-        local: dados.local,
-        nome: dados.nome,
-    };
-
-    try {
-        await addDoc(collection(bd, caminhos.usuarios, idUsuario, caminhos.eventos), evento);
-
-        resposta.mensagem = 'Evento adicionado com sucesso.';
-    } catch (erro) {
-        console.error('Falha ao adicionar evento:', erro);
-
-        resposta.status = false;
-        resposta.mensagem = 'Error ao adicionar evento';
-    }
-
-    return resposta;
-}
-
 // Funções de evento
 // Função para ler todos os eventos do usuário
 export async function lerEventos(idUsuario) {
-    const caminho = collection(bd, caminhos.usuarios, idUsuario, caminhos.eventos);
+    const caminho = collection(bd, caminhos.eventos);
     const q = query(
         caminho,
-        orderBy('nome')
+        where('proprietario', '==', idUsuario),
+        orderBy('nome'),
     );
     const resposta = { status: true, erros: {} };
+
     try {
         const querySnapshot = await getDocs(q);
         const eventos = []
@@ -157,8 +136,8 @@ export async function lerEventos(idUsuario) {
 }
 
 // Função para ler um evento do usuário 
-export async function lerEvento(idUsuario, idEvento) {
-    const caminho = doc(bd, caminhos.usuarios, idUsuario, caminhos.eventos, idEvento);
+export async function lerEvento(idEvento) {
+    const caminho = doc(bd, caminhos.eventos, idEvento);
     const resposta = { status: true, erros: {} };
 
     try {
@@ -177,14 +156,15 @@ export async function lerEvento(idUsuario, idEvento) {
 }
 
 // Função para gravar eventos do usuário
-export async function gravarEvento(idUsuario, dados) {
-    const caminho = collection(bd, caminhos.usuarios, idUsuario, caminhos.eventos);
-    const resposta = { status: true };
+export async function gravarEvento(idUsuario, dadosEvento) {
+    const caminho = collection(bd, caminhos.eventos);
+    const resposta = { status: true, erros: {} };
 
     const evento = {
-        horario: dados.horario,
-        local: dados.local,
-        nome: dados.nome,
+        data: dadosEvento.data,
+        local: dadosEvento.local,
+        nome: dadosEvento.nome,
+        proprietario: idUsuario,
     };
     
     try {
@@ -199,8 +179,9 @@ export async function gravarEvento(idUsuario, dados) {
     return resposta;
 }
 
-export async function excluirEvento(idUsuario, idEvento) {
-    const caminho = doc(bd, caminhos.usuarios, idUsuario, caminhos.eventos, idEvento);
+// Função para excluir eventos do usuário
+export async function excluirEvento(idEvento) {
+    const caminho = doc(bd, caminhos.eventos, idEvento);
     const resposta = { status: true, erros: {} };
 
     try {
@@ -215,8 +196,10 @@ export async function excluirEvento(idUsuario, idEvento) {
     return resposta;
 }
 
-export async function atualizarEvento(idUsuario, idEvento, dados) {
-	const caminho = doc(bd, caminhos.usuarios, idUsuario, caminhos.eventos, idEvento);
+// Função para editar eventos do usuário
+export async function atualizarEvento(idEvento, dados) {
+	const caminho = doc(bd, caminhos.eventos, idEvento);
+    console.log(dados);
 	const resposta = { status: true, erros: {} };
 
 	try {
