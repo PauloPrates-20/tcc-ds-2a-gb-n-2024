@@ -13,7 +13,7 @@ export default function Moldura({ titulo, children, idEvento, idUsuario, evento 
             </div>
             {evento && (
                 <div className={styles.icons}>
-                    <BotaoExcluir idAlvo={idEvento} idUsuario={idUsuario} tipoAlvo='evento' />
+                    <BotaoExcluir idEvento={idEvento} tipoAlvo='evento' />
                     <Link title='VOLTAR' href='/dashboard'>
                         <FaRegFolderClosed />
                     </Link>

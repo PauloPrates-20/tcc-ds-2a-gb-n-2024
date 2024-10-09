@@ -185,6 +185,7 @@ export async function excluirEvento(idEvento) {
     const resposta = { status: true, erros: {} };
 
     try {
+        console.log(idEvento)
         await deleteDoc(caminho);
 
         resposta.mensagem = 'Evento excluído com sucesso.';

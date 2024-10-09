@@ -5,7 +5,7 @@ import { deletarEvento } from '../lib/actions';
 import { useRouter } from 'next/navigation';
 import styles from '@/styles/BotaoExcluir.module.css';
 
-export default function BotaoExcluir({ idUsuario, idAlvo, tipoAlvo }) {
+export default function BotaoExcluir({ idEvento, tipoAlvo }) {
 	const router = useRouter();
 
 	async function deletar() {
@@ -13,7 +13,7 @@ export default function BotaoExcluir({ idUsuario, idAlvo, tipoAlvo }) {
 
 		switch(tipoAlvo) {
 			case 'evento':
-				resposta = await deletarEvento(idUsuario, idAlvo);
+				resposta = await deletarEvento(idEvento);
 				break;
 		}
 

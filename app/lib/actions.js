@@ -137,8 +137,8 @@ export async function criarEvento(idUsuario, dados) {
 }
 
 // Ação para deletar eventos
-export async function deletarEvento(idUsuario, idEvento) {
-    const resposta = await excluirEvento(idUsuario, idEvento);
+export async function deletarEvento(idEvento) {
+    const resposta = await excluirEvento(idEvento);
     revalidatePath('/dashboard');
 
     return resposta;

@@ -10,7 +10,7 @@ export default function CardEvento({ evento, idUsuario }) {
         <div className={styles.moldura}>
             <p>{evento.dados.nome}</p>
             <div className={styles.acoes}>
-                <BotaoExcluir idUsuario={idUsuario} idAlvo={evento.id} tipoAlvo='evento' />
+                <BotaoExcluir idEvento={evento.id} tipoAlvo='evento' />
                 <Link title='VISUALIZAR' className={styles.icone} href={`/dashboard/eventos/${evento.id}`}>
                     <FaRegFolderOpen />
                 </Link>
