@@ -25,13 +25,11 @@ export default async function Evento({ params }) {
 					</Moldura>
 				</div>
 				<div className={styles.moldura}>
-					<Moldura titulo='FUNCIONÁRIOS'>
-						<p>Reservado para a lista de funcionários</p>
-					</Moldura>
+					<Moldura titulo='FUNCIONÁRIOS'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores adipisci minima consectetur aspernatur ea, dolor nesciunt. Omnis eaque obcaecati odit explicabo adipisci, provident dolorum ipsa deserunt. Rem saepe perferendis optio nisi corporis voluptates fuga ab vel a cum blanditiis repellat, pariatur nostrum nobis dolore! Nam quasi distinctio magnam sunt inventore neque illo in commodi, aspernatur et doloribus vero repudiandae dolores, voluptatem voluptatum mollitia. Beatae esse, voluptas nesciunt recusandae debitis, qui amet sed eum eius tenetur facere consectetur porro ea quaerat voluptate unde molestiae ipsum, commodi sit necessitatibus! Debitis similique, voluptates sequi quos impedit cupiditate doloremque provident, error beatae quisquam libero.</Moldura>
 				</div>
 			</div>
 			<div className={styles.actions}>
-				<BotaoNav url={`/dashboard/eventos/${evento?.id}/compartilhar`}>COMPARTILHAR</BotaoNav>
+				<BotaoNav url=''>COMPARTILHAR</BotaoNav>
 				<BotaoNav url={`/dashboard/relatorios/${evento?.id}`}>RELATÓRIOS</BotaoNav>
 			</div>
 		</div>
