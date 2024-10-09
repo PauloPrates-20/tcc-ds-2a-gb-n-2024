@@ -12,7 +12,7 @@ export const metadata = {
 export default async function EditarEvento({ params }) {
     const session = await auth();
     const idUsuario = session.user.id;
-    const queryEvento = await lerEvento(params.id);
+    const queryEvento = await lerEvento(idUsuario, params.id);
     let evento = null;
 
     if (queryEvento.status) {

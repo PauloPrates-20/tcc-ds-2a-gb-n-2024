@@ -4,11 +4,11 @@ import Entrada from './Entrada';
 import BotaoForm from './BotaoForm';
 import styles from '@/styles/FormFuncionario.module.css';
 
-export default function FormFuncionario({ editar = false }) {
+export default function FormFuncionario() {
     return (
         <form className={styles.formRow}>
             <div className={styles.form}>
-                <Entrada nome='empresa' disable={!editar}>EMPRESA</Entrada>
+                <Entrada nome='credencial' disable={true}>CREDENCIAL</Entrada>
                 <Entrada nome='nome'>NOME</Entrada>
                 <Entrada nome='cargo'>CARGO</Entrada>
                 <Entrada nome='idade' tipo="number">IDADE</Entrada>

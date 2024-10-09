@@ -7,7 +7,7 @@ import { lerEvento } from '@/app/lib/firebase/firestoreQuerys';
 export default async function Evento({ params }) {
 	const session = await auth();
 	const idUsuario = session.user.id;
-	const queryEvento = await lerEvento(params.id);
+	const queryEvento = await lerEvento(idUsuario, params.id);
 	let evento = null;
 
 	if (queryEvento.status) {
@@ -20,7 +20,7 @@ export default async function Evento({ params }) {
 				<div className={styles.moldura}>
 					<Moldura titulo='EVENTO' evento={true} idEvento={evento?.id} idUsuario={idUsuario}>
 						<h1>{evento?.dados?.nome}</h1>
-						<p>DATA: {evento?.dados?.data}</p>
+						<p>DATA: {evento?.dados?.horario}</p>
 						<p>Local: {evento?.dados?.local}</p>
 					</Moldura>
 				</div>
