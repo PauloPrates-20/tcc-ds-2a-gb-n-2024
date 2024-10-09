@@ -17,12 +17,12 @@ export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
 
         const formData = new FormData(e.target);
         const dadosEvento = {
-            horario: formData.get('horario'),
+            data: formData.get('data'),
             local: formData.get('local'),
             nome: formData.get('nome'), 
         };
 				const url = editar ? (dashboard ? '/dashboard' : `/dashboard/eventos/${idEvento}`) : '/dashboard';
-				const resposta = editar ? await editarEvento(idUsuario, idEvento, dadosEvento, dashboard) : await criarEvento(idUsuario, dadosEvento);
+				const resposta = editar ? await editarEvento(idEvento, dadosEvento, dashboard) : await criarEvento(idUsuario, dadosEvento);
 
 
         if (!resposta.status) {
@@ -44,8 +44,8 @@ export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
                     NOME DO EVENTO
                 </Entrada>
                 <Entrada 
-                    nome='horario'
-                    valor={editar ? dados.horario : null}
+                    nome='data'
+                    valor={editar ? dados.data : null}
                 >
                     DATA
                 </Entrada>
