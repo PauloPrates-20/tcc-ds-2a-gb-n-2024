@@ -198,7 +198,9 @@ export async function cadastrarEmpresa(idEvento, dadosEmpresa) {
     const repetido = await lerEmpresa(idEvento, dadosEmpresa.cnpj);
 
     if (repetido.status && repetido?.empresa) {
-        return { status: false, erros: { repetido: 'Empresa já cadastrada'} };
+        const respostaRepetido = { status: false, erros: { repetido: 'Empresa já cadastrada'} }
+        console.error(respostaRepetido.erros);
+        return respostaRepetido;
     }
 
     // Cadastra a empresa
