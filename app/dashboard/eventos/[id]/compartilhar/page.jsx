@@ -3,12 +3,12 @@ import Etiqueta from '@/app/components/Etiqueta';
 import Moldura from '@/app/components/Moldura';
 import styles from '@/styles/Compartilhar.module.css';
 
-export default function Compartilhar() {
+export default function Compartilhar({ params }) {
     return (
         <div className={styles.container}>
             <div className={styles.form}>
                 <Etiqueta>CADASTRO DE EMPRESAS  </Etiqueta>
-                <FormEmpresa />
+                <FormEmpresa idEvento={params.id} />
             </div>
             <Moldura titulo='Empresas'>
                 <p>Reservado para a lista de empresas</p>

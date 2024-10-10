@@ -21,8 +21,8 @@ const caminhos = {
     funcionarios: 'Funcionarios',
 };
 
-// Funções de usuário
-// Função para gravar o documento usuário no banco de dados
+// Querys de usuário
+// Query para gravar o documento usuário no banco de dados
 export async function cadastrarUsuario(dadosUsuario) {
     const resposta = { status: true, erros: {} };
     const usuario = {
@@ -46,7 +46,7 @@ export async function cadastrarUsuario(dadosUsuario) {
     return resposta;
 }
 
-// Função para ler todos os usuários do banco de dados
+// Query para ler todos os usuários do banco de dados
 export async function lerUsuarios() {
     const resposta = { status: true, erros: {} };
 
@@ -67,7 +67,7 @@ export async function lerUsuarios() {
     return resposta;
 }
 
-// Função para recuperar o usuário e comparar a senha
+// Query para recuperar o usuário e comparar a senha
 // Credenciais = { usuario, senha }
 export async function logarUsuario(credenciais) {
     const resposta = { status: true, erros: {} };
@@ -108,8 +108,8 @@ export async function logarUsuario(credenciais) {
     return resposta;
 }
 
-// Funções de evento
-// Função para ler todos os eventos do usuário
+// Querys de evento
+// Query para ler todos os eventos do usuário
 export async function lerEventos(idUsuario) {
     const caminho = collection(bd, caminhos.eventos);
     const q = query(
@@ -135,7 +135,7 @@ export async function lerEventos(idUsuario) {
     return resposta;
 }
 
-// Função para ler um evento do usuário 
+// Query para ler um evento do usuário 
 export async function lerEvento(idEvento) {
     const caminho = doc(bd, caminhos.eventos, idEvento);
     const resposta = { status: true, erros: {} };
@@ -155,7 +155,7 @@ export async function lerEvento(idEvento) {
     return resposta;
 }
 
-// Função para gravar eventos do usuário
+// Query para gravar eventos do usuário
 export async function gravarEvento(idUsuario, dadosEvento) {
     const caminho = collection(bd, caminhos.eventos);
     const resposta = { status: true, erros: {} };
@@ -179,7 +179,7 @@ export async function gravarEvento(idUsuario, dadosEvento) {
     return resposta;
 }
 
-// Função para excluir eventos do usuário
+// Query para excluir eventos do usuário
 export async function excluirEvento(idEvento) {
     const caminho = doc(bd, caminhos.eventos, idEvento);
     const resposta = { status: true, erros: {} };
@@ -197,10 +197,9 @@ export async function excluirEvento(idEvento) {
     return resposta;
 }
 
-// Função para editar eventos do usuário
+// Query para editar eventos do usuário
 export async function atualizarEvento(idEvento, dados) {
 	const caminho = doc(bd, caminhos.eventos, idEvento);
-    console.log(dados);
 	const resposta = { status: true, erros: {} };
 
 	try {
@@ -213,4 +212,79 @@ export async function atualizarEvento(idEvento, dados) {
 	}
 
 	return resposta;
+}
+
+// Querys de empresas convidadas
+// Query para cadastrar empresas convidadas
+export async function gravarEmpresa(idEvento, dadosEmpresa) {
+    const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.empresas);
+    const empresa = {
+        cnpj: dadosEmpresa.cnpj,
+        nome: dadosEmpresa.nome,
+        convidado: true,
+    }
+    const resposta = { status: true, erros: {} };
+
+    try {
+        await addDoc(caminho, empresa);
+
+        resposta.mensagem = "Empresa cadastrada com sucesso";
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+
+    return resposta;
+}
+
+// Query para ler uma empresa
+export async function lerEmpresa(idEvento, cnpj) {
+    const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.empresas);
+    const q = query(
+        caminho,
+        where('cnpj', '==', cnpj)
+    );
+    const resposta = { status: true, erros: {} }
+
+    try {
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+            resposta.empresa = {
+                id: querySnapshot.docs[0].id,
+                dados: querySnapshot.docs[0].data(),
+            };
+        }
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+
+    return resposta;
+}
+
+// Query para ler todas as empresas
+export async function lerEmpresas(idEvento) {
+    const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.empresas);
+    const resposta = { status: true, erros: {} };
+    const q = query(
+        caminho,
+        orderBy('nome')
+    );
+
+    try {
+        const querySnapshot = await getDocs(q);
+        const empresas = [];
+
+        querySnapshot.forEach(doc => {
+            empresas.push({ id: doc.id, dados: doc.data() });
+        });
+
+        resposta.empresas = empresas;
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+
+    return resposta;
 }

@@ -26,7 +26,7 @@ export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
 
 
         if (!resposta.status) {
-            console.error(resposta.mensagem ? resposta.mensagem : resposta);
+            console.error(resposta.erros);
             return;
         }
 

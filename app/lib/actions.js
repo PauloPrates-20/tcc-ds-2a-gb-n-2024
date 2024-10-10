@@ -1,5 +1,5 @@
 'use server';
-import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento } from '@/app/lib/firebase/firestoreQuerys';
+import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa } from '@/app/lib/firebase/firestoreQuerys';
 import { signIn, signOut } from '@/auth';
 import { revalidatePath } from 'next/cache';
 
@@ -86,11 +86,30 @@ export async function validarUsuario(cnpj, email) {
     return repetido;
 }
 
+export async function validarEmpresa(dadosEmpresa) {
+    const validacao = { status: true, erros: {} };
+
+    if (!dadosEmpresa?.cnpj) {
+        validacao.status = false;
+        validacao.erros.cpnj = 'Campo CNPJ não pode estar vazio.';
+    }
+
+    if (!dadosEmpresa?.nome) {
+        validacao.status = false;
+        validacao.erros.nome = 'Campo NOME não pode estar vazio.';
+    }
+
+    return validacao;
+}
+
 // Executa as validações e cadastra o usuário
 export async function cadastrar(dadosUsuario) {
-    const validacao = await validarCadastro(dadosUsuario);
+    const respostaValidacao = await validarCadastro(dadosUsuario);
     
-    if (!validacao.status) return validacao;
+    if (!respostaValidacao.status) {
+        console.error(respostaValidacao.erros);
+        return respostaValidacao;
+    } 
 
     const repetido = await validarUsuario(dadosUsuario.cnpj, dadosUsuario.email);
 
@@ -121,10 +140,11 @@ export async function deslogar() {
 // Ações de eventos
 // Ação para criar eventos
 export async function criarEvento(idUsuario, dados) {
-    const validacao = await validarEvento(dados);
+    const respostaValidacao = await validarEvento(dados);
 
-    if (!validacao.status) {
-        return validacao.erros;
+    if (!respostaValidacao.status) {
+        console.error(respostaValidacao.erros);
+        return respostaValidacao;
     }
 
     const resposta = await gravarEvento(idUsuario, dados);
@@ -161,4 +181,32 @@ export async function editarEvento(idEvento, dados, dashboard) {
 	}
 
 	return resposta;
+}
+
+// Ações de empresas
+// Ação para cadastrar empresas
+export async function cadastrarEmpresa(idEvento, dadosEmpresa) {
+    // Verifica se os dados recebidos estão corretos
+    const respostaValidacao = await validarEmpresa(dadosEmpresa)
+
+    if (!respostaValidacao.status) {
+        console.error(respostaValidacao.erros);
+        return respostaValidacao;
+    }
+
+    // Verifica se a empresa já existe para aquele evento
+    const repetido = await lerEmpresa(idEvento, dadosEmpresa.cnpj);
+
+    if (repetido.status && repetido?.empresa) {
+        return { status: false, erros: { repetido: 'Empresa já cadastrada'} };
+    }
+
+    // Cadastra a empresa
+    const resposta = await gravarEmpresa(idEvento, dadosEmpresa);
+
+    if (resposta.status) {
+        revalidatePath(`/dashboard/eventos/${idEvento}/compartilhar`);
+    }
+
+    return resposta;
 }
