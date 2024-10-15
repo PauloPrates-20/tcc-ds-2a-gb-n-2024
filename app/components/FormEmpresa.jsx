@@ -19,6 +19,7 @@ export default function FormEmpresa({ idEvento }) {
         }
 
         console.log(resposta.mensagem);
+				e.target.reset();
     }
     return (
         <form onSubmit={handleSubmit} className={styles.form}> 
