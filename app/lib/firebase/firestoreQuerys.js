@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, addDoc, collection, getDocs, query, where, or, orderBy, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { generateKeySync } from 'node:crypto';
 
 // Configuração do banco de dados
 const firebaseConfig = {
@@ -159,12 +160,14 @@ export async function lerEvento(idEvento) {
 export async function gravarEvento(idUsuario, dadosEvento) {
     const caminho = collection(bd, caminhos.eventos);
     const resposta = { status: true, erros: {} };
+		const codigo = generateKeySync('hmac', { length: 32 }).export().toString('hex');
 
     const evento = {
         data: dadosEvento.data,
         local: dadosEvento.local,
         nome: dadosEvento.nome,
         proprietario: idUsuario,
+				codigo: codigo,
     };
     
     try {
@@ -185,7 +188,6 @@ export async function excluirEvento(idEvento) {
     const resposta = { status: true, erros: {} };
 
     try {
-        console.log(idEvento)
         await deleteDoc(caminho);
 
         resposta.mensagem = 'Evento excluído com sucesso.';
