@@ -309,6 +309,7 @@ export async function excluirEmpresa(idEvento, idEmpresa) {
 }
 
 // Query para logar a empresa
+// Teste pendente
 export async function logarEmpresa(idEvento, credenciais) {
     const { cnpj, codigo } = credenciais;
     const caminhoEmpresa = collection(bd, caminhos.eventos, idEvento, caminhos.empresas);
@@ -347,4 +348,6 @@ export async function logarEmpresa(idEvento, credenciais) {
         resposta.status = false;
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
+
+    return resposta;
 }
