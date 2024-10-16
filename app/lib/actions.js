@@ -1,5 +1,5 @@
 'use server';
-import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa } from '@/app/lib/firebase/firestoreQuerys';
+import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa, excluirEmpresa } from '@/app/lib/firebase/firestoreQuerys';
 import { signIn, signOut } from '@/auth';
 import { revalidatePath } from 'next/cache';
 
@@ -211,4 +211,15 @@ export async function cadastrarEmpresa(idEvento, dadosEmpresa) {
     }
 
     return resposta;
+}
+
+// Ação para excluir uma empresa
+export async function deletarEmpresa(idEvento, idEmpresa) {
+	const resposta = await excluirEmpresa(idEvento, idEmpresa);
+
+	if (resposta.status) {
+		revalidatePath(`/dashboard/eventos/${idEvento}/compartilhar`);
+	}
+
+	return resposta;
 }

@@ -290,3 +290,20 @@ export async function lerEmpresas(idEvento) {
 
     return resposta;
 }
+
+// Query para excluir uma empresa
+export async function excluirEmpresa(idEvento, idEmpresa) {
+	const caminho = doc(bd, caminhos.eventos, idEvento, caminhos.empresas, idEmpresa);
+	const resposta = { status: true, erros: {} };
+
+	try {
+		await deleteDoc(caminho);
+
+		resposta.mensagem = 'Empresa deletada com sucesso';
+	} catch (erro) {
+		resposta.status = false;
+		resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+	}
+
+	return resposta;
+}

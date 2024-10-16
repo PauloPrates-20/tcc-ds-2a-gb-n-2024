@@ -1,11 +1,11 @@
 'use client';
 
 import { FaRegTrashCan } from 'react-icons/fa6';
-import { deletarEvento } from '../lib/actions';
+import { deletarEmpresa, deletarEvento } from '../lib/actions';
 import { useRouter } from 'next/navigation';
 import styles from '@/styles/BotaoExcluir.module.css';
 
-export default function BotaoExcluir({ idEvento, tipoAlvo, cor }) {
+export default function BotaoExcluir({ idEvento, idEmpresa, tipoAlvo, cor }) {
 	const router = useRouter();
 
 	async function deletar() {
@@ -14,10 +14,13 @@ export default function BotaoExcluir({ idEvento, tipoAlvo, cor }) {
 		switch(tipoAlvo) {
 			case 'evento':
 				resposta = await deletarEvento(idEvento);
+				router.push('/dashboard');
+				break;
+			case 'empresa':
+				resposta = await deletarEmpresa(idEvento, idEmpresa);
 				break;
 		}
 
-		router.push('/dashboard');
 		console.log(resposta?.mensagem ? resposta.mensagem : resposta?.erros);
 	}
 
