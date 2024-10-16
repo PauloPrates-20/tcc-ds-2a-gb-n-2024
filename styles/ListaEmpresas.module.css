@@ -1,0 +1,35 @@
+.lista {
+	list-style: none;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 50%;
+}
+
+.item {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 1.8rem;
+
+	width: 100%;
+}
+
+.dados {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	width: 80%;
+}
+
+.acoes {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	align-items: center;
+	width: 15%;
+}
