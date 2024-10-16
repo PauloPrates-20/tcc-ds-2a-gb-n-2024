@@ -5,7 +5,7 @@ import { deletarEvento } from '../lib/actions';
 import { useRouter } from 'next/navigation';
 import styles from '@/styles/BotaoExcluir.module.css';
 
-export default function BotaoExcluir({ idEvento, tipoAlvo }) {
+export default function BotaoExcluir({ idEvento, tipoAlvo, cor }) {
 	const router = useRouter();
 
 	async function deletar() {
@@ -23,7 +23,7 @@ export default function BotaoExcluir({ idEvento, tipoAlvo }) {
 
 	return (
 		<button className={styles.icone} onClick={deletar}>
-			<FaRegTrashCan />
+			<FaRegTrashCan style={{ color: cor ? cor : '#333' }}/>
 		</button>
 	);
 }
