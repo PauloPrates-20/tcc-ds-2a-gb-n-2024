@@ -4,7 +4,7 @@ import styles from '@/styles/Moldura.module.css';
 import Link from 'next/link';
 import BotaoExcluir from './BotaoExcluir';
 
-export default function Moldura({ titulo, children, idEvento, idUsuario, evento = false }) {
+export default function Moldura({ titulo, children, idEvento, evento = false }) {
     return (
         <div className={styles.detalhes}>
             <Etiqueta corFundo='#fff' corTexto='#2c6a68'>{titulo}</Etiqueta>
@@ -13,7 +13,7 @@ export default function Moldura({ titulo, children, idEvento, idUsuario, evento 
             </div>
             {evento && (
                 <div className={styles.icons}>
-                    <BotaoExcluir idEvento={idEvento} tipoAlvo='evento' />
+                    <BotaoExcluir idEvento={idEvento} tipoAlvo='evento' cor='#fff' />
                     <Link title='VOLTAR' href='/dashboard'>
                         <FaRegFolderClosed />
                     </Link>

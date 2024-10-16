@@ -5,7 +5,7 @@ import styles from '@/styles/CardEvento.module.css';
 import Link from 'next/link';
 import BotaoExcluir from './BotaoExcluir';
 
-export default function CardEvento({ evento, idUsuario }) {
+export default function CardEvento({ evento }) {
     return (
         <div className={styles.moldura}>
             <p>{evento.dados.nome}</p>
