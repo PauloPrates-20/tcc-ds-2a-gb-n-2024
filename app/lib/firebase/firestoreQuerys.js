@@ -307,3 +307,44 @@ export async function excluirEmpresa(idEvento, idEmpresa) {
 
 	return resposta;
 }
+
+// Query para logar a empresa
+export async function logarEmpresa(idEvento, credenciais) {
+    const { cnpj, codigo } = credenciais;
+    const caminhoEmpresa = collection(bd, caminhos.eventos, idEvento, caminhos.empresas);
+    const caminhoEvento = doc(bd, caminhos.eventos, idEvento);
+    const queryEmpresa = query(
+        caminhoEmpresa,
+        where('cnpj', '==', cnpj)
+    );
+    const resposta = { status: true, erros: {} };
+    
+    try {
+        const evento = await getDoc(caminhoEvento);
+
+        if (evento) {
+            const querySnapshot = await getDocs(queryEmpresa);
+
+            if (!querySnapshot.empty) {
+                if (evento.data.codigo === codigo) {
+                    resposta.empresa = {
+                        id: querySnapshot.docs[0].id,
+                        dados: querySnapshot.docs[0].data()
+                    };
+                } else {
+                    resposta.status = false;
+                    resposta.erros.credenciais = 'Credenciais inválidas.';
+                }
+            } else {
+                resposta.status = false;
+                resposta.erros.credenciais = 'Credenciais inválidas.';
+            }
+        } else {
+            resposta.status = false;
+            resposta.erros.evento = 'Evento não encontrado';
+        }
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+}
