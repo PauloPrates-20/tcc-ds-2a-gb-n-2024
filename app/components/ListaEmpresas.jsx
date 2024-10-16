@@ -17,7 +17,7 @@ export default async function ListaEmpresas({ idEvento, codigo }) {
 					</div>
 					<div className={styles.acoes}>
 						<BotaoExcluir cor='#fff' idEvento={idEvento} idEmpresa={empresa.id} tipoAlvo='empresa' />
-						<BotaoCompartilhar cor='#fff' codigo={codigo} />
+						<BotaoCompartilhar cor='#fff' codigo={codigo} idEvento={idEvento} />
 					</div>
 				</li>
 			))}
