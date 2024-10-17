@@ -90,7 +90,12 @@ export async function logarUsuario(credenciais) {
 
 			// Verifica se a senha digitada é igual a senha cadastrada para o login
 			if (doc.data().senha === credenciais.senha) {
-                const usuario = { id: doc.id, email: doc.data().email, name: doc.data().nome };
+                const usuario = { 
+                    id: doc.id,
+                    email: doc.data().email,
+                    name: doc.data().nome, 
+                    role: 'usuario'
+                };
 
                 resposta.usuario = usuario;
                 resposta.mensagem = 'Usuário autenticado com sucesso.';
@@ -310,8 +315,8 @@ export async function excluirEmpresa(idEvento, idEmpresa) {
 
 // Query para logar a empresa
 // Teste pendente
-export async function logarEmpresa(idEvento, credenciais) {
-    const { cnpj, codigo } = credenciais;
+export async function logarEmpresa(credenciais) {
+    const { cnpj, codigo, idEvento } = credenciais;
     const caminhoEmpresa = collection(bd, caminhos.eventos, idEvento, caminhos.empresas);
     const caminhoEvento = doc(bd, caminhos.eventos, idEvento);
     const queryEmpresa = query(
@@ -327,11 +332,13 @@ export async function logarEmpresa(idEvento, credenciais) {
             const querySnapshot = await getDocs(queryEmpresa);
 
             if (!querySnapshot.empty) {
-                if (evento.data.codigo === codigo) {
-                    resposta.empresa = {
+                if (evento.data().codigo === codigo) {
+                    resposta.usuario = {
                         id: querySnapshot.docs[0].id,
-                        dados: querySnapshot.docs[0].data()
+                        nome: querySnapshot.docs[0].data().nome,
+                        role: 'convidado',
                     };
+                    resposta.mensagem = 'Empresa autenticada com sucesso.';
                 } else {
                     resposta.status = false;
                     resposta.erros.credenciais = 'Credenciais inválidas.';

@@ -120,13 +120,12 @@ export async function cadastrar(dadosUsuario) {
 }
 
 // Ações de autenticação
-// Ação para autenticar o usuário
+// Ação para autenticar o usuário/convidado
 export async function autenticar(dados) {
     try {
         await signIn('credentials', { ...dados, redirect: false });
     } catch (erro) {
-        console.error(erro);
-        return { ok: false, erro: erro.message };
+        return { ok: false, erros: { auth: `Erro de autenticação: ${erro.message}` } };
     }
 
     return { ok: true };
