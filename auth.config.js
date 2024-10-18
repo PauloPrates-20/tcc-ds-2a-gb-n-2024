@@ -9,7 +9,6 @@ export const authConfig = {
 			const estaAutenticado = !!auth?.user;
 			const convidado = !!auth?.user?.email?.includes('convidado');
 			const idEvento = auth?.user?.email?.split('_')[1];
-			console.log(convidado, idEvento);
 			const estaEmRotaPublica = rotasPublicas.includes(nextUrl.pathname) || /^\/dashboard\/eventos\/[^/]+\/convite$/.test(nextUrl.pathname);
 
 			if (!estaEmRotaPublica) {
