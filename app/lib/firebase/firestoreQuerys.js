@@ -94,7 +94,6 @@ export async function logarUsuario(credenciais) {
                     id: doc.id,
                     email: doc.data().email,
                     name: doc.data().nome, 
-                    role: 'usuario'
                 };
 
                 resposta.usuario = usuario;
@@ -335,8 +334,8 @@ export async function logarEmpresa(credenciais) {
                 if (evento.data().codigo === codigo) {
                     resposta.usuario = {
                         id: querySnapshot.docs[0].id,
-                        nome: querySnapshot.docs[0].data().nome,
-                        role: 'convidado',
+                        name: querySnapshot.docs[0].data().nome,
+                        email: `convidado_${idEvento}`,
                     };
                     resposta.mensagem = 'Empresa autenticada com sucesso.';
                 } else {
