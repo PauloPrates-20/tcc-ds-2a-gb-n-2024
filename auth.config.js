@@ -17,7 +17,7 @@ export const authConfig = {
 
 			if (!estaEmRotaPublica) {
 				if (estaAutenticado) {
-					if (convidado && !/^\/dashboard\/eventos\/[^/]+\/cadastro-funcionario$/.test(nextUrl.pathname)) {
+					if (convidado && !rotaEvento.test(nextUrl.pathname)) {
 						return Response.redirect(new URL(`/dashboard/eventos/${idEvento}/cadastro-funcionario`, nextUrl));
 					}
 					return true;
