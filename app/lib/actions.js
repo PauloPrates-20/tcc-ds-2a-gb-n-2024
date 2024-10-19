@@ -12,7 +12,7 @@ export async function validarCadastro(dadosUsuario) {
     if (!dadosUsuario?.email) {
         validacao.status = false
         validacao.erros.email = 'Campo email não pode estar vazio.';
-    } else if (!/\w+@\w+.com/.test(dadosUsuario.email)) { // Usa uma Expressão Regular para verificar se o formato do email é valido
+    } else if (!/\w+@\w+.com(.\w+)*/.test(dadosUsuario.email)) { // Usa uma Expressão Regular para verificar se o formato do email é valido
         validacao.status = false;
         validacao.erros.email = 'Email inválido.'
     }
@@ -70,20 +70,25 @@ export async function validarEvento(dadosEvento) {
 
 // Verifica se o usuário já existe no banco de dados
 export async function validarUsuario(cnpj, email) {
-    const usuarios = await lerUsuarios();
+    const resposta = await lerUsuarios();
     let repetido = { status: false, mensagem: '' };
 
-    usuarios.forEach(usuario => {
-        if (usuario.email === email) {
-            repetido.status = true;
-            repetido.mensagem = 'Email já cadastrado.';
-        } else if (usuario.cnpj === cnpj) {
-            repetido.status = true;
-            repetido.mensagem = 'CNPJ já cadastrado.';
-        }
-    });
+    if (resposta.status) {
+        resposta.usuarios.forEach(usuario => {
+            if (usuario.email === email) {
+                repetido.status = true;
+                repetido.mensagem = 'Email já cadastrado.';
+            } else if (usuario.cnpj === cnpj) {
+                repetido.status = true;
+                repetido.mensagem = 'CNPJ já cadastrado.';
+            }
+        });
 
-    return repetido;
+        return repetido;
+    }
+
+    return resposta;
+
 }
 
 export async function validarEmpresa(dadosEmpresa) {
