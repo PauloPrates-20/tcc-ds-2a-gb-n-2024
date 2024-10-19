@@ -9,6 +9,7 @@ export default function Entrada({ nome, tipo, children, disable, valor }) {
 			name={nome}
 			disabled={disable ? disable : false}
 			defaultValue={valor ? valor : ''}
+			id={nome}
 		/>
 	);
 }
