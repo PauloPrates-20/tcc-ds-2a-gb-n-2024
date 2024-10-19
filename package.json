@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "firebase": "^10.12.2",
+    "jquery": "^3.7.1",
+    "jquery-mask-plugin": "^1.14.16",
     "next": "^14.2.12",
     "next-auth": "^5.0.0-beta.19",
     "react": "^18.3.1",
