@@ -4,8 +4,11 @@ import Entrada from './Entrada';
 import BotaoForm from './BotaoForm';
 import styles from '@/styles/FormPadrao.module.css';
 import { cadastrarEmpresa } from '../lib/actions';
+import mascara from '../lib/masks';
 
 export default function FormEmpresa({ idEvento }) {
+    mascara('cnpj', '00.000.000/0000-00');
+
     async function handleSubmit(e) {
         e.preventDefault();
 

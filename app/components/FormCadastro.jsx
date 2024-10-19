@@ -4,9 +4,21 @@ import styles from '@/styles/FormCadastro.module.css';
 import BotaoForm from './BotaoForm';
 import Entrada from './Entrada';
 import { cadastrar } from '../lib/actions';
-
+import mascara from '../lib/masks';
 
 export default function FormCadastro() {
+    const SPMaskBehavior = function (val) {
+        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+    },
+    spOptions = {
+        onKeyPress: function(val, e, field, options) {
+            field.mask(SPMaskBehavior.apply({}, arguments), options);
+        }
+    };
+
+    mascara('cnpj', '00.000.000/0000-00');
+    mascara('telefone', SPMaskBehavior, spOptions);
+
     async function handleSubmit(e) {
         e.preventDefault();
 

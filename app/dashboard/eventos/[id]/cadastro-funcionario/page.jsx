@@ -2,8 +2,12 @@ import Image from 'next/image';
 import styles from '@/styles/Cadastro.module.css';
 import icon from '@/public/assets/cadastro-funcionario.png';
 import FormFuncionario from '@/app/components/FormFuncionario';
+import { auth } from '@/auth';
 
-export default function CadastroFuncionario() {
+export default async function CadastroFuncionario() {
+    const session = await auth();
+    const usuario = session.user;
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -14,7 +18,7 @@ export default function CadastroFuncionario() {
                 />
                 <p>FUNCIONARIO</p>
             </div>
-            <FormFuncionario />
+            <FormFuncionario nomeEmpresa={usuario.name} />
         </div>
     );
 }

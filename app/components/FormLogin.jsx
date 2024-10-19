@@ -25,7 +25,7 @@ export default function FormLogin() {
 	return (
 		<form onSubmit={handleSubmit} className={styles.form}>
 			<div className={styles.entradas}>
-				<Entrada nome='usuario'>EMAIL OU CNPJ</Entrada>
+				<Entrada nome='usuario'>EMAIL</Entrada>
 				<Entrada nome='senha' tipo='password'>SENHA</Entrada>
 			</div>
 

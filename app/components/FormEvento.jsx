@@ -6,11 +6,14 @@ import styles from '@/styles/FormPadrao.module.css';
 import Entrada from './Entrada';
 import BotaoForm from './BotaoForm';
 import BotaoNav from './BotaoNav';
+import mascara from '../lib/masks';
 
 export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
     const searchParams = useSearchParams();
     const dashboard = searchParams.get('dashboard') || false;
     const router = useRouter();
+
+    mascara('data', '00/00/0000');
 
     async function handleSubmit(e) {
         e.preventDefault();
