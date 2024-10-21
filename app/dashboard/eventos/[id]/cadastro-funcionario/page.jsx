@@ -1,8 +1,9 @@
 import Image from 'next/image';
-import styles from '@/styles/Cadastro.module.css';
+import styles from '@/styles/Funcionario.module.css';
 import icon from '@/public/assets/cadastro-funcionario.png';
 import FormFuncionario from '@/app/components/FormFuncionario';
 import { auth } from '@/auth';
+import Moldura from '@/app/components/Moldura';
 
 export default async function CadastroFuncionario() {
     const session = await auth();
@@ -18,7 +19,12 @@ export default async function CadastroFuncionario() {
                 />
                 <p>FUNCIONARIO</p>
             </div>
-            <FormFuncionario nomeEmpresa={usuario.name} />
+            <div className={styles.main}>
+                <FormFuncionario nomeEmpresa={usuario.name} />
+                <Moldura titulo='FUNCIONARIOS'>
+                    <p>Reservado para a lista de funcionarios</p>
+                </Moldura>
+            </div>
         </div>
     );
 }
