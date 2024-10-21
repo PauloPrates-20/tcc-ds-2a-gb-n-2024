@@ -357,3 +357,82 @@ export async function logarEmpresa(credenciais) {
 
     return resposta;
 }
+
+// Querys de funcionários
+// Query para cadastrar funcionários
+export async function adicionarFuncionario(idEvento, nomeEmpresa, dados) {
+    const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.funcionarios);
+    const { nome, cargo, idade, cpf, email } = dados;
+    const resposta = { status: true, erros: {} };
+
+    try {
+        const funcionario = {
+            empresa: nomeEmpresa,
+            nome: nome,
+            cargo: cargo,
+            idade: idade,
+            cpf: cpf,
+            email: email,
+        };
+
+        await addDoc(caminho, funcionario);
+
+        resposta.mensagem = 'Funcionário cadastrado com sucesso';
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+
+    return resposta;
+}
+
+// Query para ler um funcionário
+export async function lerFuncionario(idEvento, cpf) {
+    const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.funcionarios);
+    const q = query(
+        caminho,
+        where('cpf', '==', cpf)
+    );
+    const resposta = { status: true, erros: {} };
+
+    try {
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+            const docFuncionario = querySnapshot.docs[0];
+            const funcionario = {
+                id: docFuncionario.id,
+                dados: docFuncionario.data()
+            };
+
+            resposta.funcionario = funcionario
+        }
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+}
+
+// Query para ler todos os funcionários
+export async function lerFuncionarios(idEvento) {
+    const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.funcionarios);
+    const q = query(
+        caminho,
+        orderBy('nome')
+    );
+    const resposta = { status: true, erros: {} };
+
+    try {
+        const querySnapshot = await getDocs(q);
+        const funcionarios = [];
+        
+        querySnapshot.forEach(doc => {
+            funcionarios.push({ id: doc.id, dados: doc.data() });
+        })
+
+        resposta.funcionarios = funcionarios;
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+}
