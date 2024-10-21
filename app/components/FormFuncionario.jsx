@@ -5,7 +5,7 @@ import BotaoForm from './BotaoForm';
 import styles from '@/styles/FormFuncionario.module.css';
 import mascara from '../lib/masks';
 
-export default function FormFuncionario({ nomeEmpresa, editar = false }) {
+export default function FormFuncionario({ nomeEmpresa, idEvento, editar = false }) {
     mascara('cpf', '000.000.000-00');
     mascara('idade', '00/00/0000');
 

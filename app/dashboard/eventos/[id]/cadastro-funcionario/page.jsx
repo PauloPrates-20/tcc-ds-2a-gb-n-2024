@@ -5,7 +5,7 @@ import FormFuncionario from '@/app/components/FormFuncionario';
 import { auth } from '@/auth';
 import Moldura from '@/app/components/Moldura';
 
-export default async function CadastroFuncionario() {
+export default async function CadastroFuncionario({ params }) {
     const session = await auth();
     const usuario = session.user;
 
@@ -20,7 +20,7 @@ export default async function CadastroFuncionario() {
                 <p>FUNCIONARIO</p>
             </div>
             <div className={styles.main}>
-                <FormFuncionario nomeEmpresa={usuario.name} />
+                <FormFuncionario nomeEmpresa={usuario.name} idEvento={params.id} />
                 <Moldura titulo='FUNCIONARIOS'>
                     <p>Reservado para a lista de funcionarios</p>
                 </Moldura>
