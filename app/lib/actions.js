@@ -91,6 +91,7 @@ export async function validarUsuario(cnpj, email) {
 
 }
 
+// Verifica se os dados do formulário de empresa estão corretos
 export async function validarEmpresa(dadosEmpresa) {
     const validacao = { status: true, erros: {} };
 
@@ -227,3 +228,6 @@ export async function deletarEmpresa(idEvento, idEmpresa) {
 
 	return resposta;
 }
+
+// Ações de funcionário
+// Cadastrar funcionário
