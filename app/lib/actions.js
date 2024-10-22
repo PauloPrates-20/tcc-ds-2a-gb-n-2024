@@ -271,7 +271,7 @@ export async function deletarEmpresa(idEvento, idEmpresa) {
 
 // Ações de funcionário
 // Ação para cadastrar funcionário
-export async function cadastrarFuncionário(idEvento, dadosFuncionario) {
+export async function cadastrarFuncionário(idEvento, dadosFuncionario, idEmpresa) {
     // Valida os dados do funcionario
     const respostaValidacao = await validarFuncionario(dadosFuncionario);
 
@@ -288,7 +288,7 @@ export async function cadastrarFuncionário(idEvento, dadosFuncionario) {
     }
 
     // Cadastra o funcionário;
-    const resposta = await adicionarFuncionario(idEvento, dadosFuncionario);
+    const resposta = await adicionarFuncionario(idEvento, dadosFuncionario, idEmpresa);
 
     if (resposta.status) {
         revalidatePath(`/dashboard/eventos/${idEvento}`);
