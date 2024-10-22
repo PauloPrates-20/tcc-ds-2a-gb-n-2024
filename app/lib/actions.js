@@ -1,5 +1,5 @@
 'use server';
-import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa, excluirEmpresa } from '@/app/lib/firebase/firestoreQuerys';
+import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa, excluirEmpresa, lerFuncionario, adicionarFuncionario } from '@/app/lib/firebase/firestoreQuerys';
 import { signIn, signOut } from '@/auth';
 import { revalidatePath } from 'next/cache';
 
@@ -103,6 +103,46 @@ export async function validarEmpresa(dadosEmpresa) {
     if (!dadosEmpresa?.nome) {
         validacao.status = false;
         validacao.erros.nome = 'Campo NOME não pode estar vazio.';
+    }
+
+    return validacao;
+}
+
+// Verifica se os dados do formulário de funcionário estão corretos
+export async function validarFuncionario(dadosFuncionario) {
+    const validacao = { status: true, erros: {} };
+
+    if (!dadosFuncionario?.empresa) {
+        validacao.status = false;
+        validacao.erros.empresa = 'Campo EMPRESA não pode estar vazio.';
+    }
+
+    if (!dadosFuncionario?.nome) {
+        validacao.status = false;
+        validacao.erros.nome = 'Campo NOME não pode estar vazio.';
+    }
+
+    if (!dadosFuncionario?.cargo) {
+        validacao.status = false;
+        validacao.erros.cargo = 'Campo CARGO não pode estar vazio.';
+    }
+
+    if (!dadosFuncionario?.idade) {
+        validacao.status = false;
+        validacao.erros.idade = 'Campo DATA DE NASCIMENTO não pode estar vazio.';
+    }
+
+    if (!dadosFuncionario?.cpf) {
+        validacao.status = false;
+        validacao.erros.cpf = 'Campo CPF não pode estar vazio.';
+    }
+
+    if (!dadosFuncionario?.email) {
+        validacao.status = false;
+        validacao.erros.email = 'Campo EMAIL não pode estar vazio.';
+    } else if (!/\w+@\w+.com(.\w+)*/.test(dadosFuncionario.email)) {
+        validacao.status = false;
+        validacao.erros.email = 'E-mail inválido.';
     }
 
     return validacao;
@@ -230,4 +270,30 @@ export async function deletarEmpresa(idEvento, idEmpresa) {
 }
 
 // Ações de funcionário
-// Cadastrar funcionário
+// Ação para cadastrar funcionário
+export async function cadastrarFuncionário(idEvento, dadosFuncionario) {
+    // Valida os dados do funcionario
+    const respostaValidacao = await validarFuncionario(dadosFuncionario);
+
+    if (!respostaValidacao.status) return respostaValidacao;
+
+    // Verifica se o usuário já está cadastrado no evento
+    const repetido = await lerFuncionario(idEvento, dadosFuncionario.cpf);
+
+    if (repetido.status && repetido?.funcionario) {
+        repetido.status = false;
+        repetido.erros.repetido = 'Funcionário já cadastrado';
+
+        return repetido;
+    }
+
+    // Cadastra o funcionário;
+    const resposta = await adicionarFuncionario(idEvento, dadosFuncionario);
+
+    if (resposta.status) {
+        revalidatePath(`/dashboard/eventos/${idEvento}`);
+        revalidatePath(`/dashboard/eventos/${idEvento}/cadastro-funcionario`);
+    }
+
+    return resposta;
+}

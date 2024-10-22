@@ -360,14 +360,14 @@ export async function logarEmpresa(credenciais) {
 
 // Querys de funcionários
 // Query para cadastrar funcionários
-export async function adicionarFuncionario(idEvento, nomeEmpresa, dados) {
+export async function adicionarFuncionario(idEvento, dados) {
     const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.funcionarios);
-    const { nome, cargo, idade, cpf, email } = dados;
+    const { nome, cargo, idade, cpf, email, empresa } = dados;
     const resposta = { status: true, erros: {} };
 
     try {
         const funcionario = {
-            empresa: nomeEmpresa,
+            empresa: empresa,
             nome: nome,
             cargo: cargo,
             idade: idade,
@@ -411,6 +411,8 @@ export async function lerFuncionario(idEvento, cpf) {
         resposta.status = false;
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
+
+    return resposta;
 }
 
 // Query para ler todos os funcionários
