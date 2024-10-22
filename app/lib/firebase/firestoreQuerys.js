@@ -360,7 +360,7 @@ export async function logarEmpresa(credenciais) {
 
 // Querys de funcionários
 // Query para cadastrar funcionários
-export async function adicionarFuncionario(idEvento, dados) {
+export async function adicionarFuncionario(idEvento, dados, idEmpresa) {
     const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.funcionarios);
     const { nome, cargo, idade, cpf, email, empresa } = dados;
     const resposta = { status: true, erros: {} };
@@ -373,6 +373,7 @@ export async function adicionarFuncionario(idEvento, dados) {
             idade: idade,
             cpf: cpf,
             email: email,
+            proprietario: idEmpresa,
         };
 
         await addDoc(caminho, funcionario);
@@ -416,12 +417,21 @@ export async function lerFuncionario(idEvento, cpf) {
 }
 
 // Query para ler todos os funcionários
-export async function lerFuncionarios(idEvento) {
+export async function lerFuncionarios(idEvento, idEmpresa) {
     const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.funcionarios);
-    const q = query(
+    let q = query(
         caminho,
         orderBy('nome')
     );
+
+    // if (idEmpresa) {
+    //     q = query(
+    //         caminho,
+    //         where('proprietario', '==', idEmpresa),
+    //         orderBy('nome')
+    //     );
+    // }
+
     const resposta = { status: true, erros: {} };
 
     try {
@@ -439,4 +449,21 @@ export async function lerFuncionarios(idEvento) {
     }
 
     return resposta;
+}
+
+// Query para excluir um funcionário
+export async function excluirFuncionario(idEvento, idFuncionario) {
+	const caminho = doc(bd, caminhos.eventos, idEvento, caminhos.funcionarios, idFuncionario);
+	const resposta = { status: true, erros: {} };
+
+	try {
+		await deleteDoc(caminho);
+
+		resposta.mensagem = 'Funcionario deletado com sucesso';
+	} catch (erro) {
+		resposta.status = false;
+		resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+	}
+
+	return resposta;
 }

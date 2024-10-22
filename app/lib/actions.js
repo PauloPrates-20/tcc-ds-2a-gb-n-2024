@@ -1,5 +1,5 @@
 'use server';
-import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa, excluirEmpresa, lerFuncionario, adicionarFuncionario } from '@/app/lib/firebase/firestoreQuerys';
+import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa, excluirEmpresa, lerFuncionario, adicionarFuncionario, excluirFuncionario } from '@/app/lib/firebase/firestoreQuerys';
 import { signIn, signOut } from '@/auth';
 import { revalidatePath } from 'next/cache';
 
@@ -289,6 +289,19 @@ export async function cadastrarFuncionário(idEvento, dadosFuncionario) {
 
     // Cadastra o funcionário;
     const resposta = await adicionarFuncionario(idEvento, dadosFuncionario);
+
+    if (resposta.status) {
+        revalidatePath(`/dashboard/eventos/${idEvento}`);
+        revalidatePath(`/dashboard/eventos/${idEvento}/cadastro-funcionario`);
+    }
+
+    return resposta;
+}
+
+// Ação para deletar funcionário
+export async function deletarFuncionário(idEvento, idFuncionário) {
+    console.log(idEvento, idFuncionário);
+    const resposta = await excluirFuncionario(idEvento, idFuncionário);
 
     if (resposta.status) {
         revalidatePath(`/dashboard/eventos/${idEvento}`);
