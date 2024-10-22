@@ -4,6 +4,7 @@ import icon from '@/public/assets/cadastro-funcionario.png';
 import FormFuncionario from '@/app/components/FormFuncionario';
 import { auth } from '@/auth';
 import Moldura from '@/app/components/Moldura';
+import ListaFuncionarios from '@/app/components/ListaFuncionarios';
 
 export default async function CadastroFuncionario({ params }) {
     const session = await auth();
@@ -22,7 +23,7 @@ export default async function CadastroFuncionario({ params }) {
             <div className={styles.main}>
                 <FormFuncionario nomeEmpresa={usuario.name} idEvento={params.id} />
                 <Moldura titulo='FUNCIONARIOS'>
-                    <p>Reservado para a lista de funcionarios</p>
+                    <ListaFuncionarios idEvento={params.id} />
                 </Moldura>
             </div>
         </div>

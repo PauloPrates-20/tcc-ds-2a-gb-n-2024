@@ -437,4 +437,6 @@ export async function lerFuncionarios(idEvento) {
         resposta.status = false;
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
+
+    return resposta;
 }
