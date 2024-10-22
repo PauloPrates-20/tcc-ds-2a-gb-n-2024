@@ -3,6 +3,7 @@ import BotaoNav from '@/app/components/BotaoNav';
 import styles from '@/styles/Evento.module.css';
 import { auth } from '@/auth';
 import { lerEvento } from '@/app/lib/firebase/firestoreQuerys';
+import ListaFuncionarios from '@/app/components/ListaFuncionarios';
 
 export default async function Evento({ params }) {
 	const session = await auth();
@@ -26,7 +27,7 @@ export default async function Evento({ params }) {
 				</div>
 				<div className={styles.moldura}>
 					<Moldura titulo='FUNCIONÁRIOS'>
-						<p>Reservado para a lista de funcionários</p>
+						<ListaFuncionarios idEvento={evento?.id} />
 					</Moldura>
 				</div>
 			</div>
