@@ -23,7 +23,7 @@ export default async function CadastroFuncionario({ params }) {
             <div className={styles.main}>
                 <FormFuncionario nomeEmpresa={usuario.name} idEvento={params.id} />
                 <Moldura titulo='FUNCIONARIOS'>
-                    <ListaFuncionarios idEvento={params.id} />
+                    <ListaFuncionarios idEvento={params.id} idEmpresa={usuario.id} />
                 </Moldura>
             </div>
         </div>

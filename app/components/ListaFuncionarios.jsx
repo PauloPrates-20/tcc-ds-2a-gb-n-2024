@@ -2,8 +2,8 @@ import { lerFuncionarios } from '../lib/firebase/firestoreQuerys';
 import BotaoExcluir from './BotaoExcluir';
 import styles from '@/styles/ListaFuncionarios.module.css';
 
-export default async function ListaFuncionarios({ idEvento }) {
-	const queryFuncionarios = await lerFuncionarios(idEvento);
+export default async function ListaFuncionarios({ idEvento, idEmpresa }) {
+	const queryFuncionarios = idEmpresa ? await lerFuncionarios(idEvento) : await lerFuncionarios(idEvento, idEmpresa);
 	const funcionarios = queryFuncionarios.status ? queryFuncionarios.funcionarios : null;
 
 	return (
@@ -16,7 +16,7 @@ export default async function ListaFuncionarios({ idEvento }) {
                         <span>{funcionario.dados.cpf}</span>
 					</div>
 					<div className={styles.acoes}>
-						<BotaoExcluir cor='#fff' idEvento={idEvento} idfuncionario={funcionario.id} tipoAlvo='funcionario' />
+						<BotaoExcluir cor='#fff' idEvento={idEvento} idFuncionario={funcionario.id} tipoAlvo='funcionario' />
 					</div>
 				</li>
 			))}

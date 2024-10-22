@@ -424,13 +424,13 @@ export async function lerFuncionarios(idEvento, idEmpresa) {
         orderBy('nome')
     );
 
-    // if (idEmpresa) {
-    //     q = query(
-    //         caminho,
-    //         where('proprietario', '==', idEmpresa),
-    //         orderBy('nome')
-    //     );
-    // }
+    if (idEmpresa) {
+        q = query(
+            caminho,
+            where('proprietario', '==', idEmpresa),
+            orderBy('nome')
+        );
+    }
 
     const resposta = { status: true, erros: {} };
 

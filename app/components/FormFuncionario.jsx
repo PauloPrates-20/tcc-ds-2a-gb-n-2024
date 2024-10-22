@@ -6,7 +6,7 @@ import styles from '@/styles/FormFuncionario.module.css';
 import mascara from '../lib/masks';
 import { cadastrarFuncionário } from '../lib/actions';
 
-export default function FormFuncionario({ nomeEmpresa, idEvento, editar = false }) {
+export default function FormFuncionario({ nomeEmpresa, idEvento, idEmpresa, editar = false }) {
     mascara('cpf', '000.000.000-00');
     mascara('idade', '00/00/0000');
 
@@ -23,7 +23,7 @@ export default function FormFuncionario({ nomeEmpresa, idEvento, editar = false 
             email: formData.get('email'),
         };
 
-        const resposta = await cadastrarFuncionário(idEvento, dadosFuncionario);
+        const resposta = await cadastrarFuncionário(idEvento, dadosFuncionario, idEmpresa);
 
         if (!resposta.status) {
             console.error(resposta.erros);
