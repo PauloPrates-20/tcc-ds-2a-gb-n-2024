@@ -10,6 +10,8 @@
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
+
+    position: relative;
 }
 
 .detalhes p {
@@ -19,11 +21,11 @@
 
 .texto {
     height: 70%;
-		width: 100%;
+	width: 100%;
     overflow-y: auto;
     padding: 1.2rem;
 
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     color: #fff;
     border-radius: 1.5rem;
 }
