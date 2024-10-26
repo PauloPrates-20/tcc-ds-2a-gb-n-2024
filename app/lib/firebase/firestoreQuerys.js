@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, addDoc, collection, getDocs, query, where, or, orderBy, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { generateKeySync } from 'node:crypto';
+import { Resposta } from '../class';
 
 // Configuração do banco de dados
 const firebaseConfig = {
@@ -25,7 +26,7 @@ const caminhos = {
 // Querys de usuário
 // Query para gravar o documento usuário no banco de dados
 export async function cadastrarUsuario(dadosUsuario) {
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
     const usuario = {
         cnpj: dadosUsuario.cnpj,
         email: dadosUsuario.email,
@@ -49,7 +50,7 @@ export async function cadastrarUsuario(dadosUsuario) {
 
 // Query para ler todos os usuários do banco de dados
 export async function lerUsuarios() {
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
 
     try {
         const querySnapshot = await getDocs(collection(bd, caminhos.usuarios));
@@ -71,7 +72,7 @@ export async function lerUsuarios() {
 // Query para recuperar o usuário e comparar a senha
 // Credenciais = { usuario, senha }
 export async function logarUsuario(credenciais) {
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
 	// Query para encontrar o usuário por email ou cnpj
 	const q = query(
 		collection(bd, caminhos.usuarios),
@@ -122,7 +123,7 @@ export async function lerEventos(idUsuario) {
         where('proprietario', '==', idUsuario),
         orderBy('nome'),
     );
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
 
     try {
         const querySnapshot = await getDocs(q);
@@ -143,7 +144,7 @@ export async function lerEventos(idUsuario) {
 // Query para ler um evento do usuário 
 export async function lerEvento(idEvento) {
     const caminho = doc(bd, caminhos.eventos, idEvento);
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
 
     try {
         const querySnapshot = await getDoc(caminho);
@@ -163,7 +164,7 @@ export async function lerEvento(idEvento) {
 // Query para gravar eventos do usuário
 export async function gravarEvento(idUsuario, dadosEvento) {
     const caminho = collection(bd, caminhos.eventos);
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
 		const codigo = generateKeySync('hmac', { length: 32 }).export().toString('hex');
 
     const evento = {
@@ -189,7 +190,7 @@ export async function gravarEvento(idUsuario, dadosEvento) {
 // Query para excluir eventos do usuário
 export async function excluirEvento(idEvento) {
     const caminho = doc(bd, caminhos.eventos, idEvento);
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
 
     try {
         await deleteDoc(caminho);
@@ -206,7 +207,7 @@ export async function excluirEvento(idEvento) {
 // Query para editar eventos do usuário
 export async function atualizarEvento(idEvento, dados) {
 	const caminho = doc(bd, caminhos.eventos, idEvento);
-	const resposta = { status: true, erros: {} };
+	const resposta = new Resposta();
 
 	try {
 		await updateDoc(caminho, dados);
@@ -229,7 +230,7 @@ export async function gravarEmpresa(idEvento, dadosEmpresa) {
         nome: dadosEmpresa.nome,
         convidado: true,
     }
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
 
     try {
         await addDoc(caminho, empresa);
@@ -250,7 +251,7 @@ export async function lerEmpresa(idEvento, cnpj) {
         caminho,
         where('cnpj', '==', cnpj)
     );
-    const resposta = { status: true, erros: {} }
+    const resposta = new Resposta()
 
     try {
         const querySnapshot = await getDocs(q);
@@ -272,7 +273,7 @@ export async function lerEmpresa(idEvento, cnpj) {
 // Query para ler todas as empresas
 export async function lerEmpresas(idEvento) {
     const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.empresas);
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
     const q = query(
         caminho,
         orderBy('nome')
@@ -298,7 +299,7 @@ export async function lerEmpresas(idEvento) {
 // Query para excluir uma empresa
 export async function excluirEmpresa(idEvento, idEmpresa) {
 	const caminho = doc(bd, caminhos.eventos, idEvento, caminhos.empresas, idEmpresa);
-	const resposta = { status: true, erros: {} };
+	const resposta = new Resposta();
 
 	try {
 		await deleteDoc(caminho);
@@ -322,7 +323,7 @@ export async function logarEmpresa(credenciais) {
         caminhoEmpresa,
         where('cnpj', '==', cnpj)
     );
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
     
     try {
         const evento = await getDoc(caminhoEvento);
@@ -363,7 +364,7 @@ export async function logarEmpresa(credenciais) {
 export async function adicionarFuncionario(idEvento, dados, idEmpresa) {
     const caminho = collection(bd, caminhos.eventos, idEvento, caminhos.funcionarios);
     const { nome, cargo, idade, cpf, email, empresa } = dados;
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
 
     try {
         const funcionario = {
@@ -394,7 +395,7 @@ export async function lerFuncionario(idEvento, cpf) {
         caminho,
         where('cpf', '==', cpf)
     );
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
 
     try {
         const querySnapshot = await getDocs(q);
@@ -432,7 +433,7 @@ export async function lerFuncionarios(idEvento, idEmpresa) {
         );
     }
 
-    const resposta = { status: true, erros: {} };
+    const resposta = new Resposta();
 
     try {
         const querySnapshot = await getDocs(q);
@@ -454,7 +455,7 @@ export async function lerFuncionarios(idEvento, idEmpresa) {
 // Query para excluir um funcionário
 export async function excluirFuncionario(idEvento, idFuncionario) {
 	const caminho = doc(bd, caminhos.eventos, idEvento, caminhos.funcionarios, idFuncionario);
-	const resposta = { status: true, erros: {} };
+	const resposta = new Resposta();
 
 	try {
 		await deleteDoc(caminho);

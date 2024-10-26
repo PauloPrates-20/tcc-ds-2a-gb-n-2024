@@ -2,11 +2,12 @@
 import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa, excluirEmpresa, lerFuncionario, adicionarFuncionario, excluirFuncionario } from '@/app/lib/firebase/firestoreQuerys';
 import { signIn, signOut } from '@/auth';
 import { revalidatePath } from 'next/cache';
+import { Resposta } from './class';
 
 // Validações
 // Verifica se os dados do formulário de cadastro de usuário estão corretos
 export async function validarCadastro(dadosUsuario) {
-    const validacao = { status: true, erros: {} };
+    const validacao = new Resposta();
 
     // Validação de email
     if (!dadosUsuario?.email) {
@@ -48,7 +49,7 @@ export async function validarCadastro(dadosUsuario) {
 }
 
 export async function validarEvento(dadosEvento) {
-    const validacao = { status: true, erros: {} };
+    const validacao = new Resposta();
 
     if (!dadosEvento?.data) {
         validacao.status = false;
@@ -93,7 +94,7 @@ export async function validarUsuario(cnpj, email) {
 
 // Verifica se os dados do formulário de empresa estão corretos
 export async function validarEmpresa(dadosEmpresa) {
-    const validacao = { status: true, erros: {} };
+    const validacao = new Resposta();
 
     if (!dadosEmpresa?.cnpj) {
         validacao.status = false;
@@ -110,7 +111,7 @@ export async function validarEmpresa(dadosEmpresa) {
 
 // Verifica se os dados do formulário de funcionário estão corretos
 export async function validarFuncionario(dadosFuncionario) {
-    const validacao = { status: true, erros: {} };
+    const validacao = new Resposta();
 
     if (!dadosFuncionario?.empresa) {
         validacao.status = false;
