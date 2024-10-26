@@ -7,19 +7,24 @@ export default async function ListaFuncionarios({ idEvento, idEmpresa }) {
 	const funcionarios = queryFuncionarios.status ? queryFuncionarios.funcionarios : null;
 
 	return (
-		<ul className={styles.lista}>
-			{funcionarios?.length > 0 && funcionarios.map(funcionario => (
-				<li className={styles.item} key={funcionario.id}>
-					<div className={styles.dados}>
-						<span>{funcionario.dados.nome}</span>
-						<span>{funcionario.dados.cargo}</span>
-                        <span>{funcionario.dados.cpf}</span>
-					</div>
-					<div className={styles.acoes}>
-						<BotaoExcluir cor='#fff' idEvento={idEvento} idFuncionario={funcionario.id} tipoAlvo='funcionario' />
-					</div>
-				</li>
-			))}
-		</ul>
+		<table className={styles.table}>
+			<thead>
+				<tr className={styles.header}>
+					<th>NOME</th>
+					<th>CARGO</th>
+					<th>CPF</th>
+				</tr>
+			</thead>
+			<tbody>
+				{funcionarios?.length > 0 && funcionarios.map(funcionario => (
+					<tr className={styles.dados} key={funcionario.id}>
+						<td>{funcionario.dados.nome}</td>
+						<td>{funcionario.dados.cargo}</td>
+						<td>{funcionario.dados.cpf}</td>
+						<td className={styles.acoes}><BotaoExcluir cor='#fff' idEvento={idEvento} idFuncionario={funcionario.id} tipoAlvo='funcionario' /></td>
+					</tr>
+				))}
+			</tbody>
+		</table>
 	);
 }
