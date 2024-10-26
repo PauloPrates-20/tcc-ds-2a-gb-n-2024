@@ -1,6 +1,6 @@
 'use server';
-import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa, excluirEmpresa, lerFuncionario, adicionarFuncionario, excluirFuncionario } from '@/app/lib/firebase/firestoreQuerys';
-import { signIn, signOut } from '@/auth';
+import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa, excluirEmpresa, lerFuncionario, adicionarFuncionario, excluirFuncionario, gravarRelatorio } from '@/app/lib/firebase/firestoreQuerys';
+import { signIn, signOut, auth } from '@/auth';
 import { revalidatePath } from 'next/cache';
 import { Resposta } from './class';
 
@@ -45,7 +45,7 @@ export async function validarCadastro(dadosUsuario) {
         validacao.erros.telefone = 'Campo telefone não pode estar vazio';
     }
 
-    return validacao;
+    return { ...validacao };
 }
 
 export async function validarEvento(dadosEvento) {
@@ -66,7 +66,7 @@ export async function validarEvento(dadosEvento) {
         validacao.erros.nome = 'Campo nome não pode estar vazio';
     }
 
-    return validacao;
+    return { ...validacao };
 }
 
 // Verifica se o usuário já existe no banco de dados
@@ -106,7 +106,7 @@ export async function validarEmpresa(dadosEmpresa) {
         validacao.erros.nome = 'Campo NOME não pode estar vazio.';
     }
 
-    return validacao;
+    return { ...validacao };
 }
 
 // Verifica se os dados do formulário de funcionário estão corretos
@@ -146,7 +146,7 @@ export async function validarFuncionario(dadosFuncionario) {
         validacao.erros.email = 'E-mail inválido.';
     }
 
-    return validacao;
+    return { ...validacao };
 }
 
 // Executa as validações e cadastra o usuário
@@ -172,7 +172,7 @@ export async function autenticar(dados) {
     try {
         await signIn('credentials', { ...dados, redirect: false });
     } catch (erro) {
-        return { ok: false, erros: { auth: `Erro de autenticação: ${erro.message}` } };
+        return { ok: false, erros: { auth: 'Não foi possível realizar o login. \nVerifique as credenciais informadas.' } };
     }
 
     return { ok: true };
@@ -307,6 +307,16 @@ export async function deletarFuncionário(idEvento, idFuncionário) {
     if (resposta.status) {
         revalidatePath(`/dashboard/eventos/${idEvento}`);
         revalidatePath(`/dashboard/eventos/${idEvento}/cadastro-funcionario`);
+    }
+
+    return resposta;
+}
+
+export async function adicionarRelatorio(idEvento, relatorio) {
+    const resposta = await gravarRelatorio(idEvento, relatorio);
+
+    if (resposta.status) {
+        revalidatePath(`/dashboard/relatorios/${idEvento}`);
     }
 
     return resposta;

@@ -45,7 +45,7 @@ export async function cadastrarUsuario(dadosUsuario) {
         resposta.erros.bd = `Erro de banco de dados: ${erro}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para ler todos os usuários do banco de dados
@@ -66,7 +66,7 @@ export async function lerUsuarios() {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para recuperar o usuário e comparar a senha
@@ -100,7 +100,7 @@ export async function logarUsuario(credenciais) {
                 resposta.usuario = usuario;
                 resposta.mensagem = 'Usuário autenticado com sucesso.';
 
-                return resposta;
+                return { ...resposta };
             }
 		}
 
@@ -111,7 +111,7 @@ export async function logarUsuario(credenciais) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
 	}
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Querys de evento
@@ -138,7 +138,7 @@ export async function lerEventos(idUsuario) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para ler um evento do usuário 
@@ -158,7 +158,7 @@ export async function lerEvento(idEvento) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para gravar eventos do usuário
@@ -184,7 +184,7 @@ export async function gravarEvento(idUsuario, dadosEvento) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para excluir eventos do usuário
@@ -201,7 +201,7 @@ export async function excluirEvento(idEvento) {
         resposta.erros.bd = `Erro ao excluir evento: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para editar eventos do usuário
@@ -218,7 +218,7 @@ export async function atualizarEvento(idEvento, dados) {
 		resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
 	}
 
-	return resposta;
+	return { ...resposta };
 }
 
 // Querys de empresas convidadas
@@ -241,7 +241,7 @@ export async function gravarEmpresa(idEvento, dadosEmpresa) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para ler uma empresa
@@ -267,7 +267,7 @@ export async function lerEmpresa(idEvento, cnpj) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para ler todas as empresas
@@ -293,7 +293,7 @@ export async function lerEmpresas(idEvento) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para excluir uma empresa
@@ -310,7 +310,7 @@ export async function excluirEmpresa(idEvento, idEmpresa) {
 		resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
 	}
 
-	return resposta;
+	return { ...resposta };
 }
 
 // Query para logar a empresa
@@ -356,7 +356,7 @@ export async function logarEmpresa(credenciais) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Querys de funcionários
@@ -385,7 +385,7 @@ export async function adicionarFuncionario(idEvento, dados, idEmpresa) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para ler um funcionário
@@ -414,7 +414,7 @@ export async function lerFuncionario(idEvento, cpf) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para ler todos os funcionários
@@ -449,7 +449,7 @@ export async function lerFuncionarios(idEvento, idEmpresa) {
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
     }
 
-    return resposta;
+    return { ...resposta };
 }
 
 // Query para excluir um funcionário
@@ -466,5 +466,21 @@ export async function excluirFuncionario(idEvento, idFuncionario) {
 		resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
 	}
 
-	return resposta;
+	return { ...resposta };
+}
+
+export async function gravarRelatorio(idEvento, relatorio) {
+    const caminho = doc(bd, caminhos.eventos, idEvento);
+    const resposta = new Resposta();
+    
+    try {
+        await updateDoc(caminho, { relatorio: relatorio });
+
+        resposta.mensagem = 'Observação salva com sucesso.';
+    } catch (erro) {
+        resposta.status = false;
+        resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
+    }
+
+    return { ...resposta };
 }
