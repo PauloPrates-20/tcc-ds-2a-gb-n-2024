@@ -5,6 +5,7 @@ import BotaoForm from './BotaoForm';
 import styles from '@/styles/FormPadrao.module.css';
 import { cadastrarEmpresa } from '../lib/actions';
 import mascara from '../lib/masks';
+import { errorHandling } from '../lib/errorHandling';
 
 export default function FormEmpresa({ idEvento }) {
     mascara('cnpj', '00.000.000/0000-00');
@@ -16,8 +17,9 @@ export default function FormEmpresa({ idEvento }) {
         const dadosEmpresa = { nome: formData.get('empresa'), cnpj: formData.get('cnpj') };
         const resposta = await cadastrarEmpresa(idEvento, dadosEmpresa);
 
-        if (!resposta.status) {
-            console.error(resposta.erros);
+        if (!resposta?.status) {
+            const erros = await errorHandling(resposta.erros);
+            window.alert(erros);
             return;
         }
 

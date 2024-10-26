@@ -6,10 +6,10 @@ import styles from '@/styles/FormPadrao.module.css';
 import { useRouter } from 'next/navigation';
 import { autenticar } from '../lib/actions';
 import mascara from '../lib/masks';
+import { errorHandling } from '../lib/errorHandling';
 
 export default function FormLoginEmpresa({ idEvento }) {
     const router = useRouter();
-    console.log(idEvento);
     mascara('cnpj', '00.000.000/0000-00');
 
     async function handleSubmit(e) {
@@ -22,11 +22,18 @@ export default function FormLoginEmpresa({ idEvento }) {
             idEvento: idEvento,
             convidado: true,
         };
-        const res = await autenticar(dadosEmpresa);
+        const resposta = await autenticar(dadosEmpresa);
 
-		if (res.ok) {
+		if (resposta.ok) {
 			router.push(`/dashboard/eventos/${idEvento}/cadastro-funcionario`);
+            return;
 		}
+
+        if (!resposta?.status) {
+            const erros = await errorHandling(resposta.erros);
+            window.alert(erros);
+            return;
+        }
     }
 
     return (

@@ -5,6 +5,7 @@ import BotaoForm from './BotaoForm';
 import styles from '@/styles/FormFuncionario.module.css';
 import mascara from '../lib/masks';
 import { cadastrarFuncionário } from '../lib/actions';
+import { errorHandling } from '../lib/errorHandling';
 
 export default function FormFuncionario({ nomeEmpresa, idEvento, idEmpresa, editar = false }) {
     mascara('cpf', '000.000.000-00');
@@ -25,8 +26,9 @@ export default function FormFuncionario({ nomeEmpresa, idEvento, idEmpresa, edit
 
         const resposta = await cadastrarFuncionário(idEvento, dadosFuncionario, idEmpresa);
 
-        if (!resposta.status) {
-            console.error(resposta.erros);
+        if (!resposta?.status) {
+            const erros = await errorHandling(resposta.erros);
+            window.alert(erros);
             return;
         }
 

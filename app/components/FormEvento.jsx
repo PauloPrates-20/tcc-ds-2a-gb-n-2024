@@ -7,6 +7,7 @@ import Entrada from './Entrada';
 import BotaoForm from './BotaoForm';
 import BotaoNav from './BotaoNav';
 import mascara from '../lib/masks';
+import { errorHandling } from '../lib/errorHandling';
 
 export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
     const searchParams = useSearchParams();
@@ -28,8 +29,9 @@ export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
 				const resposta = editar ? await editarEvento(idEvento, dadosEvento, dashboard) : await criarEvento(idUsuario, dadosEvento);
 
 
-        if (!resposta.status) {
-            console.error(resposta.erros);
+        if (!resposta?.status) {
+            const erros = await errorHandling(resposta.erros);
+            window.alert(erros);
             return;
         }
 

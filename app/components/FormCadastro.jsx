@@ -5,6 +5,7 @@ import BotaoForm from './BotaoForm';
 import Entrada from './Entrada';
 import { cadastrar } from '../lib/actions';
 import mascara from '../lib/masks';
+import { errorHandling } from '../lib/errorHandling';
 
 export default function FormCadastro() {
     const SPMaskBehavior = function (val) {
@@ -28,9 +29,14 @@ export default function FormCadastro() {
             dados[key] = value;
         }
         
-        const resp = await cadastrar(dados)
-        
-        console.log(resp);
+        const resposta = await cadastrar(dados)
+
+        if (!resposta?.status) {
+            const erros = await errorHandling(resposta.erros);
+            window.alert(erros);
+            return;
+        }
+
         e.target.reset();
     }
 

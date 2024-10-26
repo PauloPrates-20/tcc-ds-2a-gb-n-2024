@@ -5,6 +5,7 @@ import BotaoForm from './BotaoForm';
 import styles from '@/styles/FormLogin.module.css';
 import { autenticar } from '@/app/lib/actions';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { errorHandling } from '../lib/errorHandling';
 
 export default function FormLogin() {
 	const searchParams = useSearchParams();
@@ -15,11 +16,18 @@ export default function FormLogin() {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const dados = { usuario: formData.get('usuario'), senha: formData.get('senha') };
-		const res = await autenticar(dados);
+		const resposta = await autenticar(dados);
 
-		if (res.ok) {
+		if (resposta.ok) {
 			router.push(callbackUrl);
+			return;
 		}
+
+		if (!resposta?.status) {
+            const erros = await errorHandling(resposta.erros);
+            window.alert(erros);
+            return;
+        }
 	}
 
 	return (
