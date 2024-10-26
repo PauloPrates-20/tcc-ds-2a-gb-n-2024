@@ -1,7 +1,6 @@
 import CardEvento from '@/app/components/CardEvento';
 import Etiqueta from '@/app/components/Etiqueta';
 import BotaoNav from '../components/BotaoNav';
-import usuario from '@/public/teste-usuario';
 import { FaRegPenToSquare } from 'react-icons/fa6'
 import styles from '@/styles/Dashboard.module.css';
 import CardRelatorio from '@/app/components/CardRelatorio';
@@ -16,23 +15,28 @@ export default async function Dashboard() {
   const session = await auth();
   const idUsuario = session.user.id;
   const queryEventos = await lerEventos(idUsuario);
+  let eventos;
+
+  if (queryEventos.status) {
+    eventos = queryEventos.eventos;
+  }
 
   return (
     <div className={styles.container}>
-      <BotaoNav url='/dashboard/adicionar-evento'>Adicionar evento <FaRegPenToSquare /></BotaoNav>
+      <BotaoNav url='/dashboard/adicionar-evento'>ADICIONAR EVENTO <FaRegPenToSquare /></BotaoNav>
 
       <div className={styles.listas}>
-        {queryEventos.status && queryEventos.eventos.map((evento) => (
+        {eventos && eventos.map((evento) => (
           <CardEvento key={evento.id} evento={evento} idUsuario={idUsuario} />
         ))}  
       </div>
 
-			{usuario?.relatorios?.length > 0 && (
+			{!!eventos && (
 				<>
-					<Etiqueta>Relatórios</Etiqueta>
+					<Etiqueta>RELATÓRIOS</Etiqueta>
 					<div className={styles.listas}>
-						{usuario.relatorios.map((relatorio, index) => (
-							<CardRelatorio key={index} titulo={usuario.eventos.find(evento => evento.id === relatorio.evento).nome} />
+						{eventos && eventos.map((evento) => (
+							<CardRelatorio key={evento.id} titulo={evento.dados.nome} idEvento={evento.id} />
 						))}
 					</div>
 				</>
