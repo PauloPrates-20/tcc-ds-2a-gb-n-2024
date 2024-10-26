@@ -1,6 +1,6 @@
 .entrada {
   text-align: center;
-  width: 40rem;
+  width: 30rem;
   height: 3.8rem;
 
   border: .1rem solid var(--corEntradas);
@@ -16,4 +16,10 @@
 
 .entrada::placeholder {
   color: var(--corTexto);
+}
+
+@media screen and (min-width: 1280px) {
+  .entrada {
+    width: 40rem;
+  }
 }
