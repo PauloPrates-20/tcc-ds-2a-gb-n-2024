@@ -8,19 +8,23 @@ export default async function ListaEmpresas({ idEvento, codigo }) {
 	const empresas = queryEmpresas.status ? queryEmpresas.empresas : null;
 
 	return (
-		<ul className={styles.lista}>
-			{empresas.map(empresa => (
-				<li className={styles.item} key={empresa.id}>
-					<div className={styles.dados}>
-						<span>{empresa.dados.nome}</span>
-						<span>{empresa.dados.cnpj}</span>
-					</div>
-					<div className={styles.acoes}>
-						<BotaoExcluir cor='#fff' idEvento={idEvento} idEmpresa={empresa.id} tipoAlvo='empresa' />
-						<BotaoCompartilhar cor='#fff' codigo={codigo} idEvento={idEvento} />
-					</div>
-				</li>
-			))}
-		</ul>
+		<table className={styles.table}>
+			<thead className={styles.header}>
+				<th>EMPRESA</th>
+				<th>CNPJ</th>
+			</thead>
+			<tbody>
+				{empresas?.length > 0 && empresas.map(empresa => (
+					<tr key={empresa.id}>
+						<td>{empresa.dados.nome}</td>
+						<td>{empresa.dados.cnpj}</td>
+						<td>
+							<BotaoExcluir cor='#fff' idEvento={idEvento} idEmpresa={empresa.id} tipoAlvo='empresa' />
+							<BotaoCompartilhar cor='#fff' codigo={codigo} idEvento={idEvento} />
+						</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
 	);
 }

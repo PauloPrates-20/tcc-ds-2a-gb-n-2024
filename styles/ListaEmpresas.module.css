@@ -18,18 +18,22 @@
 	width: 100%;
 }
 
+.table {
+	width: 100%;
+}
+
+.header {
+	text-align: left;
+}
+
 .dados {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-	align-items: center;
-	width: 80%;
+	width: 100%;
+}
+
+.dados td {
+	width: 40%
 }
 
 .acoes {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-around;
-	align-items: center;
-	width: 15%;
+	width: 20%;
 }
