@@ -10,8 +10,10 @@ export default async function ListaEmpresas({ idEvento, codigo }) {
 	return (
 		<table className={styles.table}>
 			<thead className={styles.header}>
-				<th>EMPRESA</th>
-				<th>CNPJ</th>
+				<tr>
+					<th>EMPRESA</th>
+					<th>CNPJ</th>
+				</tr>
 			</thead>
 			<tbody>
 				{empresas?.length > 0 && empresas.map(empresa => (
