@@ -1,8 +1,6 @@
 .form {
     width: 100%;
-    height: calc(3*(3.8rem + 6rem));
-
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 
     display: flex;
     flex-flow: column wrap;
@@ -12,10 +10,7 @@
 
 .formRow  {
     width: 100%;
-    height: calc(3*(3.8rem + 6rem));
-
-    margin-bottom: 3rem;
-
+    margin-top: 3rem;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;

@@ -6,6 +6,7 @@ import styles from '@/styles/FormLogin.module.css';
 import { autenticar } from '@/app/lib/actions';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { errorHandling } from '../lib/errorHandling';
+import Link from 'next/link';
 
 export default function FormLogin() {
 	const searchParams = useSearchParams();
@@ -33,10 +34,11 @@ export default function FormLogin() {
 	return (
 		<form onSubmit={handleSubmit} className={styles.form}>
 			<div className={styles.entradas}>
-				<Entrada nome='usuario'>EMAIL</Entrada>
-				<Entrada nome='senha' tipo='password'>SENHA</Entrada>
+				<Entrada nome='usuario' >Insira seu e-mail de acesso</Entrada>
+				<Entrada nome='senha' tipo='password'>Insira sua senha</Entrada>
 			</div>
 
+			<Link className={styles.cadastro} href='/cadastro'>Não tem uma conta? <span>Cadastre-se</span>.</Link>
 			<BotaoForm tipo='submit'>ENTRAR</BotaoForm>
 		</form>
 	);

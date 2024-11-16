@@ -1,15 +1,13 @@
 import Etiqueta from '@/app/components/Etiqueta';
 import FormLoginEmpresa from '@/app/components/FormLoginEmpresa';
-import styles from '@/styles/Convite.module.css';
 
 export default function Convite({ params }) {
     return (
-        <div className={styles.container}> 
-            <div className={styles.header}>
+        <div className={`container`}> 
+            <div className={`cardForm`}>
                 <Etiqueta>CONVITE</Etiqueta>
+                <FormLoginEmpresa idEvento={params.id} />
             </div>
-
-            <FormLoginEmpresa idEvento={params.id} />
         </div>
     );
 }

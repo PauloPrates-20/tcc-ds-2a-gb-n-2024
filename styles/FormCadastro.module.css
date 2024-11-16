@@ -1,20 +1,16 @@
 .form {
     width: 100%;
-    height: calc(3*(3.8rem + 6rem));
-
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     justify-content: space-evenly;
     align-items: center;
 }   
 
 .formRow  {
     width: 100%;
-    height: calc(3*(3.8rem + 6rem));
-
-    margin-bottom: 3rem;
+    margin-top: 3rem;
 
     display: flex;
     flex-flow: row wrap;

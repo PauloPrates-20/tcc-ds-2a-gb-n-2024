@@ -1,8 +1,4 @@
-import Image from 'next/image';
 import Etiqueta from '@/app/components/Etiqueta';
-
-import icon from '@/public/assets/relatorio.png';
-
 import styles from '@/styles/Relatorio.module.css';
 import Moldura from '@/app/components/Moldura';
 import { lerEvento, lerFuncionarios } from '@/app/lib/firebase/firestoreQuerys';
@@ -25,13 +21,8 @@ export default async function Relatorio({ params }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.info}>
+			<div className={`cardForm ${styles.card}`}>
 				<div className={styles.header}>
-					<Image
-						src={icon}
-						width={148}
-						alt='Logo'
-					/>
 					<h1>RELATÓRIO</h1>
 				</div>
 				<Etiqueta>Evento: {evento?.dados.nome}</Etiqueta>

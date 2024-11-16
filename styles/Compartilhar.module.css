@@ -7,10 +7,3 @@
 
     padding-top: 5rem;
 }
-
-.form {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-}

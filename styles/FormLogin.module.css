@@ -10,3 +10,16 @@
   justify-content: center;
   align-items: center;
 }
+
+.cadastro {
+  text-decoration: none;
+  color: var(--corAction);
+  align-self: flex-start;
+  margin-left: 4rem;
+  font-size: 1.4rem;
+}
+
+.cadastro span {
+  font-weight: bold;
+  color: (--corEntradas);
+}

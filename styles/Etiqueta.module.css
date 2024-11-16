@@ -8,8 +8,7 @@
     background-color: var(--corBotoes);
 
     padding: 1rem 3rem;
-    width: fit-content;
-    border-radius: 1.5rem;
+    width: 100%;
 
     display: flex;
     flex-flow: row nowrap;

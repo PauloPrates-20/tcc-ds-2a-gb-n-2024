@@ -1,9 +1,8 @@
-import Image from 'next/image';
-import icon from '@/public/assets/evento.png';
 import styles from '@/styles/AddEvento.module.css';
 import FormEvento from '@/app/components/FormEvento';
 import { auth } from '@/auth';
 import { lerEvento } from '@/app/lib/firebase/firestoreQuerys';
+import Etiqueta from '@/app/components/Etiqueta';
 
 export const metadata = {
     title: 'Editar Evento',
@@ -20,16 +19,11 @@ export default async function EditarEvento({ params }) {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
-                <Image 
-                    src={icon}
-                    width={128}
-                    alt='Logo'
-                />
-                <p>EVENTO</p>
+    <div className={`container`}>
+            <div className={`cardForm`}>
+                <Etiqueta>Evento</Etiqueta>
+                <FormEvento editar={true} idEvento={evento.id} idUsuario={idUsuario} dados={evento.dados} />
             </div>
-            <FormEvento editar={true} idEvento={evento.id} idUsuario={idUsuario} dados={evento.dados} />
         </div>
     );
 }
