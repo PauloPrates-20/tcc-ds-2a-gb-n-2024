@@ -1,4 +1,3 @@
-import styles from '@/styles/AddEvento.module.css';
 import FormEvento from '@/app/components/FormEvento';
 import { auth } from '@/auth';
 import { lerEvento } from '@/app/lib/firebase/firestoreQuerys';

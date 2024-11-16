@@ -1,4 +1,3 @@
-import styles from '@/styles/AddEvento.module.css';
 import FormEvento from '@/app/components/FormEvento';
 import { auth } from '@/auth';
 import Etiqueta from '@/app/components/Etiqueta';
