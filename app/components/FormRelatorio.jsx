@@ -2,7 +2,7 @@
 
 import styles from '@/styles/FormRelatorio.module.css';
 import { errorHandling } from '@/app/lib/errorHandling';
-import { adicionarFuncionario, adicionarRelatorio } from '../lib/actions';
+import { adicionarRelatorio } from '../lib/actions';
 
 export default function FormRelatorio({ evento }) {
     async function handleSubmit(e) {
