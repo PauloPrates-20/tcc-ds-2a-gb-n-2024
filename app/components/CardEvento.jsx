@@ -8,7 +8,7 @@ import BotaoExcluir from './BotaoExcluir';
 export default function CardEvento({ evento }) {
     return (
         <div className={styles.moldura}>
-            <p>{evento.dados.nome}</p>
+            <p>{evento.dados.nome.toUpperCase()}</p>
             <div className={styles.acoes}>
                 <BotaoExcluir idEvento={evento.id} tipoAlvo='evento' />
                 <Link title='VISUALIZAR' className={styles.icone} href={`/dashboard/eventos/${evento.id}`}>
