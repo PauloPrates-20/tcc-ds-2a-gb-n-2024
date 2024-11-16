@@ -32,10 +32,19 @@
     padding: 1rem 2rem;
     border-radius: 1rem;
     background-color: var(--corTexto);
+
+    transition: all ease .5s;
+}
+
+.link:hover {
+    background-color: var(--corTextoHover);
+    color: var(--corTexto);
 }
 
 .link:active {
     cursor: default;
+    background-color: var(--corTexto);
+    color: var(--corBotoes);
 }
 
 .nav {

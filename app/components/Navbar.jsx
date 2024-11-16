@@ -24,7 +24,7 @@ export default function Navbar() {
 							</Link>
 						</li>
 						{(pathname !== '/login' && pathname !== '/cadastro' && !/^\/dashboard\/eventos\/[^/]+\/convite$/.test(pathname)) && (
-							<li className={styles.link}>
+							<li>
 								<Link className={styles.link} href='/dashboard'>Início</Link>
 							</li>
 						)}
