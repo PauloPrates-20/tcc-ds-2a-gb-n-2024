@@ -6,8 +6,8 @@
 
 :root {
   font-size: 62.5%;
-  --corBackground: #dafafa;
-  --corCard: #e3f7f7;
+  --corBackground: #e5f7f7;
+  --corCard: #f0fcfc;
   --corBotoes: #2c6a68;
   --corBotoesHover: #88b3b1;
   --corNav: #ffffff;
@@ -59,7 +59,7 @@ body {
 	background-color: var(--corBotoes);
 
 	padding: 1rem 3rem;
-	min-width: 25rem;
+	min-width: 20rem;
 	width: fit-content;
 	border-width: 0;
 	border-radius: 2rem;
@@ -84,4 +84,15 @@ body {
 	cursor: default;
   background-color: var(--corBotoes);
   color: var(--corTexto)
+}
+
+@media screen and (max-width: 768px) {
+  .button {
+    min-width: 15rem;
+    width: 15rem;
+  }
+
+  .cardForm {
+    width: 50%;
+  }
 }
