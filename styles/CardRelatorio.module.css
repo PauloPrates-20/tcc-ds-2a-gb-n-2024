@@ -3,8 +3,10 @@
   
   font-size: 1.6rem;
 
-  border: 1px solid #000;
+  border: 3px solid  #368e97;
   border-radius: 1rem;
+  color: #368e97;
+  font-weight: bold;
 
   width: 15rem;
   height: 15rem;
@@ -15,8 +17,7 @@
   align-items: center;
   flex-shrink: 0;
 
-  text-decoration: none;
-  color: #000;
+  background-color: #e3f7f7;
 }
 
 .titulo {
@@ -26,4 +27,5 @@
 .icone {
   font-size: 5rem;
   font-weight: lighter;
+  color: rgb(53, 53, 53);
 }

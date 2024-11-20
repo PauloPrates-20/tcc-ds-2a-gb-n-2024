@@ -19,8 +19,13 @@
 }
 
 body {
-  background-color: var(--corBackground);
+  background-image: url('../public/assets/fundo1.png'); /* Caminho para a imagem */
+  background-size: cover; /* Faz com que a imagem cubra toda a área */
+  
+  
+  
 }
+
 
 .container {
   width: 100%;

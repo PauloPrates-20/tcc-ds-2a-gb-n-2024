@@ -3,7 +3,11 @@
     
     font-size: 1.6rem;
 
-    border: 1px solid #000;
+    border: 3px solid  #368e97;
+    border-radius: 1rem;
+    color: #368e97;
+    font-weight: bold;
+      
 
     width: 15rem;
     height: 15rem;
@@ -13,6 +17,9 @@
     justify-content: space-around;
     align-items: center;
     flex-shrink: 0;
+
+    background-color: #e3f7f7;
+    
 }
 
 .moldura p {
