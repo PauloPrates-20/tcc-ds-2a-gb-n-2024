@@ -4,7 +4,7 @@ import { FaShareFromSquare } from 'react-icons/fa6';
 import styles from '@/styles/BotaoCompartilhar.module.css';
 
 export default function BotaoCompartilhar({ codigo, cor, idEvento }) {
-	const urlConvite = `http://localhost:3000/dashboard/eventos/${idEvento}/convite`;
+	const urlConvite = `${process.env.NEXT_PUBLIC_HOST_NAME}/dashboard/eventos/${idEvento}/convite`;
 	const textoCompartilhar = `Você foi convidado para o evento: ${urlConvite} \n\nUtilize seu cnpj e o código ${codigo} para acessar.`;
 
 	async function compartilhar() {
