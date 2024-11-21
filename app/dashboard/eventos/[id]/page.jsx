@@ -16,11 +16,11 @@ export default async function Evento({ params }) {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className={`container`}>
 			<div className={styles.info}>
 				<div className={styles.moldura}>
 					<Moldura titulo='EVENTO' evento={true} idEvento={evento?.id} idUsuario={idUsuario}>
-						<h1>{evento?.dados?.nome}</h1>
+						<h1>{evento?.dados?.nome.toUpperCase()}</h1>
 						<p>Data: {evento?.dados?.data}</p>
 						<p>Local: {evento?.dados?.local}</p>
 					</Moldura>

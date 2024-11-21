@@ -1,6 +1,6 @@
 import styles from '@/styles/Entrada.module.css';
 
-export default function Entrada({ nome, tipo, children, disable, valor, defValor }) {
+export default function Entrada({ nome, tipo, children, disable, valor }) {
 	return (
 		<input 
 			className={styles.entrada}

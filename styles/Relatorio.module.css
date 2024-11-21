@@ -10,14 +10,6 @@
 	align-items: flex-start;
 }
 
-.info {
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: center;
-	align-items: center;
-	gap: 3rem;
-}
-
 .header {
 	display: flex;
 	flex-flow: row nowrap;
@@ -48,4 +40,13 @@
 
 	font-size: 1.4rem;
 	color: var(--corTexto);
+}
+
+.card {
+	height: 50vh;
+	width: 45%;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }

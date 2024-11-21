@@ -29,7 +29,7 @@ export default function BotaoExcluir({ idEvento, idEmpresa, idFuncionario, tipoA
 
 	return (
 		<button className={styles.icone} onClick={deletar}>
-			<FaRegTrashCan style={{ color: cor ? cor : '#333' }}/>
+			<FaRegTrashCan style={{ color: cor ? cor : '#284144' }}/>
 		</button>
 	);
 }

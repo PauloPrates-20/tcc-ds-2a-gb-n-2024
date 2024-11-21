@@ -11,7 +11,7 @@ export default async function Compartilhar({ params }) {
 
     return (
         <div className={styles.container}>
-            <div className={styles.form}>
+            <div className={`cardForm`}>
                 <Etiqueta>CADASTRO DE EMPRESAS</Etiqueta>
                 <FormEmpresa idEvento={evento.id} />
             </div>

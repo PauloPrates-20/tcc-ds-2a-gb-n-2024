@@ -1,10 +1,9 @@
-import Image from 'next/image';
 import styles from '@/styles/Funcionario.module.css';
-import icon from '@/public/assets/cadastro-funcionario.png';
 import FormFuncionario from '@/app/components/FormFuncionario';
 import { auth } from '@/auth';
 import Moldura from '@/app/components/Moldura';
 import ListaFuncionarios from '@/app/components/ListaFuncionarios';
+import Etiqueta from '@/app/components/Etiqueta';
 
 export default async function CadastroFuncionario({ params }) {
     const session = await auth();
@@ -12,20 +11,13 @@ export default async function CadastroFuncionario({ params }) {
 
     return (
         <div className={styles.container}>
-            <div className={styles.header}>
-                <Image 
-                    src={icon}
-                    width={180}
-                    alt='Logo'
-                />
-                <p>FUNCIONARIO</p>
-            </div>
-            <div className={styles.main}>
+            <div className={`cardForm`}>
+                <Etiqueta>Funcionário</Etiqueta>
                 <FormFuncionario nomeEmpresa={usuario.name} idEvento={params.id} idEmpresa={usuario.id} />
-                <Moldura titulo='FUNCIONARIOS'>
-                    <ListaFuncionarios idEvento={params.id} idEmpresa={usuario.id} />
-                </Moldura>
             </div>
+            <Moldura titulo='FUNCIONARIOS'>
+                <ListaFuncionarios idEvento={params.id} idEmpresa={usuario.id} />
+            </Moldura>
         </div>
     );
 }

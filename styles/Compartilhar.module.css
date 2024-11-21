@@ -2,15 +2,8 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 5rem;
 
     padding-top: 5rem;
-}
-
-.form {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
 }

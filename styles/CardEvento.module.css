@@ -1,22 +1,32 @@
 .moldura {
     margin: 5rem 1rem;
+		padding: 1rem 0;
     
     font-size: 1.6rem;
 
-    border: 1px solid #000;
+    border: 3px solid  #368e97;
+    border-radius: 2rem;
+    color: #368e97;
+    font-weight: bold;
+      
 
     width: 15rem;
     height: 15rem;
 
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
+
+    background-color: #e3f7f7;
+    
 }
 
 .moldura p {
-    padding: 3rem;
+		font-size: 1.4rem;
+		text-align: center;
+		text-wrap: balance;
 }
 
 .titulo {
@@ -37,7 +47,7 @@
     cursor: pointer;
     font-size: 2rem;
     text-decoration: none;
-    color: #333;
+    color: var(--corAction);
     border: none;
     background-color: transparent;
 }

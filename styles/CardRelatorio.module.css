@@ -1,28 +1,36 @@
 .moldura {
   margin: 5rem 1rem;
+	padding: 1rem 0;
   
   font-size: 1.6rem;
 
-  border: 1px solid #000;
+  border: 3px solid  #368e97;
+  border-radius: 1rem;
+  color: #368e97;
+  font-weight: bold;
 
   width: 15rem;
   height: 15rem;
 
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
 
-  text-decoration: none;
-  color: #000;
+  background-color: #e3f7f7;
+	text-decoration: none;
 }
 
 .titulo {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+	text-align: center;
+	text-wrap: balance;
 }
 
 .icone {
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: lighter;
+  color: var(--corAction);
+	align-self: center;
 }

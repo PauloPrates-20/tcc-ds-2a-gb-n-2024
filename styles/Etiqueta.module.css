@@ -4,12 +4,12 @@
     font-size: 1.8rem;
     font-weight: bold;
     color: var(--corTexto);
+    border-radius: 1rem 1rem 1rem 1rem;
 
     background-color: var(--corBotoes);
 
     padding: 1rem 3rem;
-    width: fit-content;
-    border-radius: 1.5rem;
+    width: 100%;
 
     display: flex;
     flex-flow: row nowrap;

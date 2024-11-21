@@ -3,11 +3,20 @@
 	border: none;
 	border-radius: .5rem;
 	color: var(--corBotoes);
-	background-color: #fff;
+	background-color: var(--corTexto);
 	padding: 1rem 2rem;
-	cursor: pointer
+	cursor: pointer;
+
+	transition: all ease .5s;
+}
+
+.logout:hover {
+	color: var(--corTexto);
+	background-color: var(--corTextoHover);
 }
 
 .logout:active {
 	cursor: default;
+	color: var(--corBotoes);
+	background-color: var(--corTexto);
 }

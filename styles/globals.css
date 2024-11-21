@@ -6,15 +6,98 @@
 
 :root {
   font-size: 62.5%;
-  --corBackground: #effafa;
+  --corBackground: #e5f7f7;
+  --corCard: #f0fcfc;
   --corBotoes: #2c6a68;
+  --corBotoesHover: #88b3b1;
   --corNav: #ffffff;
-  --corTexto: #ffffff;
+  --corTexto: #e3f7f7;
+  --corTextoHover: #1292a0;
   --corThrash: #333333;
   --corAction: #284144;
   --corEntradas: #49adaa;
 }
 
 body {
-  background-color: var(--corBackground);
+  background-image: url('../public/assets/fundo1.png'); /* Caminho para a imagem */
+  background-size: cover; /* Faz com que a imagem cubra toda a área */
+  
+  
+  
+}
+
+
+.container {
+  width: 100%;
+
+  margin: 7rem 0;
+  padding: 0 2rem;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardForm {
+  width: 30%;
+  border: solid 1px #999;
+  border-radius: 4rem;
+  background-color: var(--corCard);
+
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 5rem 0;
+}
+
+.button {
+	margin-top: 1.5rem;
+	
+	text-decoration: none;
+	font-size: 1.8rem;
+	font-weight: normal;
+	color: var(--corTexto);
+
+	background-color: var(--corBotoes);
+
+	padding: 1rem 3rem;
+	min-width: 20rem;
+	width: fit-content;
+	border-width: 0;
+	border-radius: 2rem;
+
+	cursor: pointer;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	gap: .5rem;
+
+  transition: all ease .5s;
+}
+
+.button:hover {
+  background-color: var(--corBotoesHover);
+  color: var(--corTextoHover)
+}
+
+.button:active {
+	cursor: default;
+  background-color: var(--corBotoes);
+  color: var(--corTexto)
+}
+
+@media screen and (max-width: 768px) {
+  .button {
+    min-width: 15rem;
+    width: 15rem;
+  }
+
+  .cardForm {
+    width: 50%;
+  }
 }
