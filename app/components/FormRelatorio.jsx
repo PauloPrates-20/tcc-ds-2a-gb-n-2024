@@ -3,6 +3,7 @@
 import styles from '@/styles/FormRelatorio.module.css';
 import { errorHandling } from '@/app/lib/errorHandling';
 import { adicionarRelatorio } from '../lib/actions';
+import Swal from 'sweetalert2';
 
 export default function FormRelatorio({ evento }) {
     async function handleSubmit(e) {
@@ -14,9 +15,24 @@ export default function FormRelatorio({ evento }) {
 
 		if (!resposta.status) {
 			const erros = await errorHandling(resposta.erros);
-			window.alert(erros);
+			Swal.fire({
+				icon: 'error',
+				title: 'Não foi possível salvar as observações!',
+				text: erros[0],
+				customClass: {
+					popup: 'swal',
+				},
+			});
 			return;
 		}
+
+		Swal.fire({
+			icon: 'success',
+			title: resposta?.mensagem,
+			customClass: {
+				popup: 'swal',
+			},
+		});
 	} 
 
     return (
