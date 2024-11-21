@@ -26,6 +26,9 @@ body {
   
 }
 
+.swal {
+	font-size: 1.6rem;
+}
 
 .container {
   width: 100%;

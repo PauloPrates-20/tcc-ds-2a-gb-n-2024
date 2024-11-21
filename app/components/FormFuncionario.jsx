@@ -6,6 +6,7 @@ import styles from '@/styles/FormFuncionario.module.css';
 import mascara from '../lib/masks';
 import { cadastrarFuncionário } from '../lib/actions';
 import { errorHandling } from '../lib/errorHandling';
+import Swal from 'sweetalert2';
 
 export default function FormFuncionario({ nomeEmpresa, idEvento, idEmpresa, editar = false }) {
     mascara('cpf', '000.000.000-00');
@@ -28,11 +29,24 @@ export default function FormFuncionario({ nomeEmpresa, idEvento, idEmpresa, edit
 
         if (!resposta?.status) {
             const erros = await errorHandling(resposta.erros);
-            window.alert(erros);
+            Swal.fire({
+							icon: 'error',
+							title: 'Não foi possível cadastrar o funcionário!',
+							text: erros[0],
+							customClass: {
+								popup: 'swal',
+							},
+						});
             return;
         }
 
-        console.log(resposta.mensagem);
+        Swal.fire({
+					icon: 'success',
+					title: resposta?.mensagem,
+					customClass: {
+						popup: 'swal',
+					},
+				});
         e.target.reset();
     }
 

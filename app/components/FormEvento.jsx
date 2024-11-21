@@ -8,6 +8,7 @@ import BotaoForm from './BotaoForm';
 import BotaoNav from './BotaoNav';
 import mascara from '../lib/masks';
 import { errorHandling } from '../lib/errorHandling';
+import Swal from 'sweetalert2';
 
 export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
     const searchParams = useSearchParams();
@@ -26,17 +27,66 @@ export default function FormEvento({ editar, idEvento, idUsuario, dados }) {
             nome: formData.get('nome'), 
         };
 				const url = editar ? (dashboard ? '/dashboard' : `/dashboard/eventos/${idEvento}`) : '/dashboard';
-				const resposta = editar ? await editarEvento(idEvento, dadosEvento, dashboard) : await criarEvento(idUsuario, dadosEvento);
+				let resposta;
 
+				if (editar) {
+					let result = await Swal.fire({
+						icon: 'question',
+						title: 'Deseja salvar as alterações?',
+						showConfirmButton: true,
+						showDenyButton: true,
+						showCancelButton: true,
+						confirmButtonText: 'Salvar',
+						denyButtonText: 'Não salvar',
+						cancelButtonText: 'Cancelar',
+						customClass: {
+							popup: 'swal'
+						},
+					});
+
+					if (result.isConfirmed) {
+						resposta = await editarEvento(idEvento, dadosEvento, dashboard);
+					} else if (result.isDenied) {
+						result = await Swal.fire({
+							title: 'Alterações descartadas!',
+							icon: 'info',
+							customClass: {
+								popup: 'swal',
+							},
+						});
+						
+						if (result.isConfirmed || result.isDismissed) router.push(url);
+						return;
+					} else {
+						return;
+					}
+				} else {
+					resposta = await criarEvento(idUsuario, dadosEvento);
+				}
 
         if (!resposta?.status) {
             const erros = await errorHandling(resposta.erros);
-            window.alert(erros);
+            Swal.fire({
+							icon: 'error',
+							title: editar ? 'Não foi possível editar o evento!' : 'Não foi possível criar o evento',
+							text: erros[0],
+							customClass: {
+								popup: 'swal',
+							},
+						});
             return;
         }
 
-        console.log(resposta.mensagem);
-        router.push(url);
+        const dialog = await Swal.fire({
+					icon: 'success',
+					title: resposta.mensagem,
+					customClass: {
+						popup: 'swal',
+					},
+				});
+
+				e.target.reset();
+        if (dialog.isConfirmed || dialog.isDismissed) router.push(url);
     }
     
     return (

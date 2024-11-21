@@ -1,10 +1,10 @@
 'use server';
 
 export async function errorHandling(mapErros) {
-    let erros = 'Erros: \n'
+    let erros = []
 
     for (const erro in mapErros) {
-        erros += `${mapErros[erro]}\n`;
+        erros.push(mapErros[erro]);
     }
 
     return erros;

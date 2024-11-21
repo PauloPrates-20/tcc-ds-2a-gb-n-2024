@@ -2,6 +2,7 @@
 
 import { FaShareFromSquare } from 'react-icons/fa6';
 import styles from '@/styles/BotaoCompartilhar.module.css';
+import Swal from 'sweetalert2';
 
 export default function BotaoCompartilhar({ codigo, cor, idEvento }) {
 	const urlConvite = `${process.env.NEXT_PUBLIC_HOST_NAME}/dashboard/eventos/${idEvento}/convite`;
@@ -10,14 +11,25 @@ export default function BotaoCompartilhar({ codigo, cor, idEvento }) {
 	async function compartilhar() {
 		try {
 			await navigator.clipboard.writeText(textoCompartilhar);
-			window.alert('Código copiado. Compartilhe com a empresa parceira.')
+			Swal.fire({
+				icon: 'success',
+				title: 'Link de convite copiado!',
+				text: 'Compartilhe com a empresa parceira.',
+				customClass: {
+					popup: 'swal',
+				},
+			});
 		} catch (erro) {
-			console.error(erro);
+			Swal.fire({
+				icon: 'error',
+				title: 'Não foi possível gerar o link de compartilhamento!',
+				text: erro.message,
+			});
 		}
 	}
 	return (
 		<button className={styles.icone} onClick={compartilhar}>
-			<FaShareFromSquare style={{ color: cor ? cor : '#333' }}/>
+			<FaShareFromSquare style={{ color: cor ? cor : '#333' }} />
 		</button>
 	);
 }

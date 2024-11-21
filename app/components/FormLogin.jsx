@@ -7,6 +7,7 @@ import { autenticar } from '@/app/lib/actions';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { errorHandling } from '../lib/errorHandling';
 import Link from 'next/link';
+import Swal from 'sweetalert2';
 
 export default function FormLogin() {
 	const searchParams = useSearchParams();
@@ -26,7 +27,14 @@ export default function FormLogin() {
 
 		if (!resposta?.status) {
             const erros = await errorHandling(resposta.erros);
-            window.alert(erros);
+            Swal.fire({
+							title: 'Não foi possível fazer login!',
+							text: erros[0],
+							icon: 'error',
+							customClass: {
+								popup: 'swal'
+							}
+						});
             return;
         }
 	}
