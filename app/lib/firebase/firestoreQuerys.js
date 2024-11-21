@@ -39,7 +39,7 @@ export async function cadastrarUsuario(dadosUsuario) {
     try {
         await addDoc(collection(bd, caminhos.usuarios), usuario);
 
-        resposta.mensagem = `Usuário cadastrado com sucesso.`
+        resposta.mensagem = `Usuário cadastrado com sucesso!`
     } catch (erro) {
         resposta.status = false;
         resposta.erros.bd = `Erro de banco de dados: ${erro}`;
@@ -178,7 +178,7 @@ export async function gravarEvento(idUsuario, dadosEvento) {
     try {
         await addDoc(caminho, evento);
 
-        resposta.mensagem = 'Evento criado com sucesso.';
+        resposta.mensagem = 'Evento criado com sucesso!';
     } catch (erro) {
         resposta.status = false;
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
@@ -195,7 +195,7 @@ export async function excluirEvento(idEvento) {
     try {
         await deleteDoc(caminho);
 
-        resposta.mensagem = 'Evento excluído com sucesso.';
+        resposta.mensagem = 'Evento excluído com sucesso!';
     } catch (erro) {
         resposta.status = false;
         resposta.erros.bd = `Erro ao excluir evento: ${erro.message}`;
@@ -212,7 +212,7 @@ export async function atualizarEvento(idEvento, dados) {
 	try {
 		await updateDoc(caminho, dados);
 
-		resposta.mensagem = 'Evento editado com sucesso.';
+		resposta.mensagem = 'Evento editado com sucesso!';
 	} catch (erro) {
 		resposta.status = false;
 		resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
@@ -235,7 +235,7 @@ export async function gravarEmpresa(idEvento, dadosEmpresa) {
     try {
         await addDoc(caminho, empresa);
 
-        resposta.mensagem = "Empresa cadastrada com sucesso";
+        resposta.mensagem = "Empresa cadastrada com sucesso!";
     } catch (erro) {
         resposta.status = false;
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
@@ -304,7 +304,7 @@ export async function excluirEmpresa(idEvento, idEmpresa) {
 	try {
 		await deleteDoc(caminho);
 
-		resposta.mensagem = 'Empresa deletada com sucesso';
+		resposta.mensagem = 'Empresa deletada com sucesso!';
 	} catch (erro) {
 		resposta.status = false;
 		resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
@@ -379,7 +379,7 @@ export async function adicionarFuncionario(idEvento, dados, idEmpresa) {
 
         await addDoc(caminho, funcionario);
 
-        resposta.mensagem = 'Funcionário cadastrado com sucesso';
+        resposta.mensagem = 'Funcionário cadastrado com sucesso!';
     } catch (erro) {
         resposta.status = false;
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
@@ -460,7 +460,7 @@ export async function excluirFuncionario(idEvento, idFuncionario) {
 	try {
 		await deleteDoc(caminho);
 
-		resposta.mensagem = 'Funcionario deletado com sucesso';
+		resposta.mensagem = 'Funcionario deletado com sucesso!';
 	} catch (erro) {
 		resposta.status = false;
 		resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
@@ -476,7 +476,7 @@ export async function gravarRelatorio(idEvento, relatorio) {
     try {
         await updateDoc(caminho, { relatorio: relatorio });
 
-        resposta.mensagem = 'Observação salva com sucesso.';
+        resposta.mensagem = 'Observações salvas com sucesso!';
     } catch (erro) {
         resposta.status = false;
         resposta.erros.bd = `Erro de banco de dados: ${erro.message}`;
