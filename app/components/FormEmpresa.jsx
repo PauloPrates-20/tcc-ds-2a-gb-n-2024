@@ -23,7 +23,7 @@ export default function FormEmpresa({ idEvento }) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Não foi possível cadastrar a empresa!',
-				title: erros[0],
+				text: erros[0],
 				customClass: {
 					popup: 'swal',
 				},
