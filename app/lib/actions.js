@@ -1,6 +1,6 @@
 'use server';
 import { lerUsuarios, cadastrarUsuario, gravarEvento, excluirEvento, atualizarEvento, gravarEmpresa, lerEmpresa, excluirEmpresa, lerFuncionario, adicionarFuncionario, excluirFuncionario, gravarRelatorio } from '@/app/lib/firebase/firestoreQuerys';
-import { signIn, signOut, auth } from '@/auth';
+import { signIn, signOut } from '@/auth';
 import { revalidatePath } from 'next/cache';
 import { Resposta } from './class';
 
@@ -12,14 +12,14 @@ export async function validarCadastro(dadosUsuario) {
 	// Validação de email
 	if (!dadosUsuario?.email) {
 		validacao.status = false
-		validacao.erros.email = 'Campo email não pode estar vazio.';
+		validacao.erros.email = 'Campo EMAIL não pode estar vazio.';
 	} else if (!/\w+@\w+.com(.\w+)*/.test(dadosUsuario.email)) { // Usa uma Expressão Regular para verificar se o formato do email é valido
 		validacao.status = false;
 		validacao.erros.email = 'Email inválido.'
 	}
 
 	// Validação de senha
-	if (!dadosUsuario?.senha || dadosUsuario?.senha?.lenght < 6) {
+	if (!dadosUsuario?.senha || dadosUsuario?.senha?.length < 6) {
 		validacao.status = false;
 		validacao.erros.senha = 'Senha deve ter no mínimo 6 caracteres.';
 	}
@@ -32,7 +32,7 @@ export async function validarCadastro(dadosUsuario) {
 
 	if (!dadosUsuario?.nome) {
 		validacao.status = false;
-		validacao.erros.nome = 'Campo nome não pode estar vazio';
+		validacao.erros.nome = 'Campo NOME não pode estar vazio';
 	}
 
 	if (!dadosUsuario?.cnpj) {
@@ -42,7 +42,7 @@ export async function validarCadastro(dadosUsuario) {
 
 	if (!dadosUsuario?.telefone) {
 		validacao.status = false;
-		validacao.erros.telefone = 'Campo telefone não pode estar vazio';
+		validacao.erros.telefone = 'Campo TELEFONE não pode estar vazio';
 	}
 
 	return { ...validacao };
@@ -53,17 +53,17 @@ export async function validarEvento(dadosEvento) {
 
 	if (!dadosEvento?.data) {
 		validacao.status = false;
-		validacao.erros.data = 'Campo data não pode estar vazio.';
+		validacao.erros.data = 'Campo DATA não pode estar vazio.';
 	}
 
 	if (!dadosEvento?.local) {
 		validacao.status = false;
-		validacao.erros.local = 'Campo local não pode estar vazio.';
+		validacao.erros.local = 'Campo LOCAL não pode estar vazio.';
 	}
 
 	if (!dadosEvento?.nome) {
 		validacao.status = false;
-		validacao.erros.nome = 'Campo nome não pode estar vazio.';
+		validacao.erros.nome = 'Campo NOME não pode estar vazio.';
 	}
 
 	return { ...validacao };
@@ -103,7 +103,7 @@ export async function validarEmpresa(dadosEmpresa) {
 
 	if (!dadosEmpresa?.nome) {
 		validacao.status = false;
-		validacao.erros.nome = 'Campo NOME não pode estar vazio.';
+		validacao.erros.nome = 'Campo EMPRESA não pode estar vazio.';
 	}
 
 	return { ...validacao };
