@@ -21,9 +21,10 @@
 body {
   background-image: url('../public/assets/fundo1.png'); /* Caminho para a imagem */
   background-size: cover; /* Faz com que a imagem cubra toda a área */
-  
-  
-  
+	background-position: bottom;
+	background-attachment: scroll;
+	min-height: 100vh;
+	height: fit-content;
 }
 
 .swal {
@@ -33,8 +34,7 @@ body {
 .container {
   width: 100%;
 
-  margin: 7rem 0;
-  padding: 0 2rem;
+  padding: 5rem 2rem;
 
   display: flex;
   flex-flow: column nowrap;
