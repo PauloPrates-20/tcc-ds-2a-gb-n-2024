@@ -1,56 +1,61 @@
 .navbar {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
 
-    background-color: var(--corBotoes);
-    color: #fff;
+	background-color: var(--corBotoes);
+	color: #fff;
 }
 
 .navbar ul {
-    width: 100%;
+	width: 100%;
 
-    padding: 1rem 2rem;
+	padding: 1rem 2rem;
 
-    font-size: 1.4rem;
-    font-weight: bold;
+	font-size: 1.4rem;
+	font-weight: bold;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 3rem;
 }
 
 .navbar ul li {
-    list-style: none;
-    background-color: transparent;
+	list-style: none;
+	background-color: transparent;
 }
 
 .link {
-    text-decoration: none;
-    color: var(--corBotoes);
-    padding: 1rem 2rem;
-    border-radius: 1rem;
-    background-color: var(--corTexto);
+	display: block;
+	text-decoration: none;
+	color: var(--corBotoes);
+	padding: 1rem 2rem;
+	border-radius: 1rem;
+	background-color: var(--corTexto);
+	min-width: fit-content;
+	width: 10rem;
+	text-align: center;
 
-    transition: all ease .5s;
+	transition: all ease .5s;
 }
 
 .link:hover {
-    background-color: var(--corTextoHover);
-    color: var(--corTexto);
+	background-color: var(--corTextoHover);
+	color: var(--corTexto);
 }
 
 .link:active {
-    cursor: default;
-    background-color: var(--corTexto);
-    color: var(--corBotoes);
+	cursor: default;
+	background-color: var(--corTexto);
+	color: var(--corBotoes);
 }
 
 .nav {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
 }
