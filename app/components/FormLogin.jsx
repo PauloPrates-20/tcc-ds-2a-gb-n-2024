@@ -46,7 +46,6 @@ export default function FormLogin() {
 				<Entrada nome='senha' tipo='password'>Insira sua senha</Entrada>
 			</div>
 
-			<Link className={styles.cadastro} href='/cadastro'>Não tem uma conta? <span>Cadastre-se</span>.</Link>
 			<BotaoForm tipo='submit'>ENTRAR</BotaoForm>
 		</form>
 	);
